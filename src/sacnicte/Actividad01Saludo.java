@@ -10,10 +10,10 @@ import aaron.*;
 
 /**
  *
- * @author Aaron
+ * @author Sacnicté
  */
 public class Actividad01Saludo {
     public static void main(String[] args) {
-        System.out.println("");
+        System.out.println("Sacnicté Cruz Arellano\n Ya entré a mi carpeta");
     }
 }

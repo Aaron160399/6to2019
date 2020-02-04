@@ -1,4 +1,6 @@
-package aaron;
+package erika;
+
+import aaron.*;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -12,6 +14,6 @@ package aaron;
  */
 public class Actividad01Saludo {
     public static void main(String[] args) {
-        System.out.println("Aarón Lagunas Ramos\n Ya entré a mi carpeta");
+        System.out.println("");
     }
 }

@@ -10,10 +10,10 @@ import aaron.*;
 
 /**
  *
- * @author Aaron
+ * @author Avril Abimelek 
  */
 public class Actividad01Saludo {
     public static void main(String[] args) {
-        System.out.println("");
+        System.out.println("Avril Abimelek González Bazán\n Ya entré a mi carpeta:) ");
     }
 }

@@ -23,14 +23,12 @@ public class JFrameClass extends javax.swing.JFrame {
     }
     
     public DefaultTreeModel loadTree() {
-    DefaultMutableTreeNode action = new DefaultMutableTreeNode("Action");
-    DefaultMutableTreeNode horror = new DefaultMutableTreeNode("Horror");
-    DefaultMutableTreeNode comedy = new DefaultMutableTreeNode("Comedy");
-    
-    mainNode.add(action);
-    mainNode.add(horror);
-    mainNode.add(comedy);
         DefaultTreeModel model = new DefaultTreeModel(mainNode);
+        for (char i = 'a'; i <= 'z'; i++) {
+    DefaultMutableTreeNode nodo = new DefaultMutableTreeNode(i);
+    mainNode.add(nodo);
+            model = new DefaultTreeModel(mainNode);
+        }
         return model;
     }
 

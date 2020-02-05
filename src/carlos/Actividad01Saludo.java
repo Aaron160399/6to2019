@@ -1,6 +1,7 @@
 package carlos;
 
-import aaron.*;
+
+import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -10,10 +11,11 @@ import aaron.*;
 
 /**
  *
- * @author Aaron
+ * @author Carlos Pérez
  */
 public class Actividad01Saludo {
     public static void main(String[] args) {
-        System.out.println("");
+        JOptionPane.showMessageDialog(null, "Carlos Eduardo Lara Perez \n Ya entre en la carpeta!");
+        System.out.println("Carlos Eduardo Lara Perez \n Ya entre en la carpeta!");
     }
 }

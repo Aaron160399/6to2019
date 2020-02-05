@@ -5,7 +5,9 @@
  */
 package aaron;
 
+import javax.swing.ImageIcon;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
 
 /**
@@ -20,6 +22,7 @@ public class JTreeClass extends javax.swing.JFrame {
     public JTreeClass() {
         initComponents();
         jTree1.setModel(loadTree());
+        customTree();
     }
     
     public DefaultTreeModel loadTree(){
@@ -40,6 +43,18 @@ public class JTreeClass extends javax.swing.JFrame {
         
         DefaultTreeModel model = new DefaultTreeModel(mainNode);
         return model;
+    }
+    
+    public void customTree(){
+        DefaultTreeCellRenderer render = (DefaultTreeCellRenderer)jTree2.getCellRenderer();
+        //Icono de hijo
+        render.setLeafIcon(new ImageIcon(getClass().getResource("/img/file.png")));
+        //Icono de padre (Cerrado)
+        render.setOpenIcon(new ImageIcon(getClass().getResource("/img/openfolder.png")));
+        //Icono de padre (desplegado)
+        render.setClosedIcon(new ImageIcon(getClass().getResource("/img/closefolder.png")));
+        
+//        jTree2.setCellRenderer(render);
     }
 
     /**
@@ -65,6 +80,8 @@ public class JTreeClass extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jTextField2 = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTree2 = new javax.swing.JTree();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -179,15 +196,25 @@ public class JTreeClass extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("tab3", jPanel3);
 
+        jPanel4.setBackground(new java.awt.Color(255, 255, 0));
+
+        jScrollPane2.setViewportView(jTree2);
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 498, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(414, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 359, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("tab4", jPanel4);
@@ -245,7 +272,7 @@ public class JTreeClass extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -279,10 +306,12 @@ public class JTreeClass extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JTree jTree1;
+    private javax.swing.JTree jTree2;
     // End of variables declaration//GEN-END:variables
 }

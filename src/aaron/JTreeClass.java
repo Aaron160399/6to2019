@@ -222,8 +222,16 @@ public class JTreeClass extends javax.swing.JFrame {
         String category = jTextField2.getText();
         DefaultMutableTreeNode node = new DefaultMutableTreeNode(category);
         model.insertNodeInto(node, mainNode, 0);
+        //Obtiene un nodo hijo de un nodo padre, 
+        //de acuerdo a su posición
 //        model.getChild(padre, indice);
-        System.out.println(node.toString());
+        //Obtiene el texto presente en el nodo
+//        node.toString();
+        char caracter = 64;
+        System.out.println(caracter);
+        caracter++;
+        System.out.println(caracter);
+        
     }
     
     /**

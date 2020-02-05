@@ -10,10 +10,10 @@ import aaron.*;
 
 /**
  *
- * @author Aaron
+ * @author yareth
  */
 public class Actividad01Saludo {
     public static void main(String[] args) {
-        System.out.println("");
+        System.out.println(" YARETH HERNANDEZ ZETINA BEBITA");
     }
 }

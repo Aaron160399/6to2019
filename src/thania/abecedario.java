@@ -37,7 +37,7 @@ public class abecedario extends javax.swing.JFrame {
        DefaultTreeModel model = (DefaultTreeModel)jTree1.getModel();
        for (int i = 0; i < mainNode.getChildCount(); i++) {
            String letras=mainNode.getChildAt(i).toString();
-           if(text.startsWith(letras)){
+           if(text.substring(0,1).equalsIgnoreCase(letras)){
                DefaultMutableTreeNode parent = (DefaultMutableTreeNode)mainNode.getChildAt(1);
                DefaultMutableTreeNode child = new DefaultMutableTreeNode(text);
                model.insertNodeInto(child, parent, 0);

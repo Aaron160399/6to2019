@@ -5,7 +5,10 @@
  */
 package martin;
 
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
 
 /**
@@ -220,6 +223,13 @@ public class NewJFrame extends javax.swing.JFrame {
         DefaultMutableTreeNode node = new DefaultMutableTreeNode(jTextField1.getText());
         df.insertNodeInto(node, main, 0);
 
+    }
+    
+    void customT(){
+        DefaultTreeCellRenderer render = (DefaultTreeCellRenderer)jTree1.getCellRenderer();
+        render.setLeafIcon(new ImageIcon(getClass().getResource("/img/file.npg")));
+        render.setOpenIcon(new ImageIcon(getClass().getResource("/img/openfolder.npg")));
+        render.setClosedIcon(new ImageIcon(getClass().getResource("/img/closefolder.npg")));
     }
 
     /**

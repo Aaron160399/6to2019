@@ -200,13 +200,14 @@ public class NewJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     public void order() {
-        String palabra = jTextField2.getText();
+        String palabra = jTextField2.getText().toLowerCase();
+        String palabra2 = jTextField2.getText();
         DefaultTreeModel df = (DefaultTreeModel) jTree2.getModel();
         for (int i = 0; i < main2.getChildCount(); i++) {
             String letra = main2.getChildAt(i).toString();
             if (palabra.startsWith(letra)) {
                 DefaultMutableTreeNode parent = (DefaultMutableTreeNode) main2.getChildAt(i);
-                DefaultMutableTreeNode child = new DefaultMutableTreeNode(palabra);
+                DefaultMutableTreeNode child = new DefaultMutableTreeNode(palabra2);
                 df.insertNodeInto(child, parent, 0);
             }
 

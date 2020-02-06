@@ -3,60 +3,48 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sacnicte;
+package thania;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
 /**
  *
- * @author blanc
+ * @author lizbe
  */
-public class Atividad extends javax.swing.JFrame {
-DefaultMutableTreeNode mainNode= new DefaultMutableTreeNode("letters");
-    /**
-     * Creates new form Atividad
-     */
-    public Atividad() {
+public class actividad extends javax.swing.JFrame {
+
+    DefaultMutableTreeNode mainNode= new DefaultMutableTreeNode("categorias");
+    public actividad() {
         initComponents();
         jTree1.setModel(loadTree());
-        this.setLocationRelativeTo(null);
-        this.setTitle("Actividad");
     }
-public DefaultTreeModel loadTree(){
-    for (char i = 'a'; i <= 'z'; i++) {
-        DefaultMutableTreeNode childNote = new DefaultMutableTreeNode(i);
-    mainNode.add(childNote);
-    }
-    DefaultTreeModel model = new DefaultTreeModel(mainNode);
-    return model;
-}
-
-public void order(){
-    //Obtengo el texto de mi jtextfield
-    String text = jTextField1.getText();
-    //Obtengo el modelo de mi jtree
-    DefaultTreeModel model = (DefaultTreeModel)jTree1.getModel();
-    //Recorro el JTree nodo por nodo
-    for (int i = 0; i < mainNode.getChildCount(); i++) {
-        //Obtengo el valor de cada nodo
-        String letter = mainNode.getChildAt(i).toString();
-        //Si las primeras letras coinciden
-//        if (text.startsWith(letter)) {     ESTE ES PARA QUE SE GUARDE CON LA LETRA QUE ESTÁ EXACTAMENTE EN EL PADRE
-//Este es de sin importancia
-            if(text.substring(0,1).equalsIgnoreCase(letter)){
-            //Obtengo el nodo con el que coincide
-           DefaultMutableTreeNode parent = (DefaultMutableTreeNode)mainNode.getChildAt(i); 
-           //Creo un hijo
-           DefaultMutableTreeNode child = new DefaultMutableTreeNode(text); 
-           //Lo agrego
-           model.insertNodeInto(child, parent, 0);
-jTextField1.setText("");
-        }
+    
+    
+    
+    public DefaultTreeModel loadTree(){
+        DefaultMutableTreeNode action= new DefaultMutableTreeNode("action");
+        DefaultMutableTreeNode horror= new DefaultMutableTreeNode("horror");
+        DefaultMutableTreeNode comedy= new DefaultMutableTreeNode("comedy");
         
+        
+        DefaultMutableTreeNode comedy1= new DefaultMutableTreeNode("comedy1");
+        DefaultMutableTreeNode comedy2= new DefaultMutableTreeNode("comedy2");
+        
+        
+        action.add(comedy1);
+         action.add(comedy2);
+       
+        
+        
+        mainNode.add(action);
+        mainNode.add(horror);
+        mainNode.add(comedy);
+
+        DefaultTreeModel model = new DefaultTreeModel(mainNode);
+        return model;
 
     }
-}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -74,14 +62,15 @@ jTextField1.setText("");
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(102, 0, 102));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 204));
 
         jScrollPane1.setViewportView(jTree1);
 
-        jButton1.setText("Ingresar");
+        jButton1.setText("add");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -94,69 +83,100 @@ jTextField1.setText("");
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(72, 72, 72)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addContainerGap(66, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(55, 55, 55)
+                        .addComponent(jButton1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1)))
+                .addContainerGap(78, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("tab1", jPanel1);
 
-        jPanel2.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel2.setBackground(new java.awt.Color(255, 153, 255));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 612, Short.MAX_VALUE)
+            .addGap(0, 413, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 381, Short.MAX_VALUE)
+            .addGap(0, 303, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("tab2", jPanel2);
+
+        jPanel3.setBackground(new java.awt.Color(153, 153, 255));
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 413, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 303, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("tab3", jPanel3);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPane1)
-                .addContainerGap())
+                .addGap(31, 31, 31)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(55, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPane1)
-                .addContainerGap())
+                .addGap(43, 43, 43)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(59, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-         // TODO add your handling code here:
-         order();
+        // TODO add your handling code here:
+        
+        addCategory();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    public void addCategory(){
+        DefaultTreeModel model = (DefaultTreeModel) jTree1.getModel();
+        String category=jTextField1.getText();
+        DefaultMutableTreeNode node = new DefaultMutableTreeNode(category);
+        model.insertNodeInto(node, mainNode, 0);
+    }
+    
+    
+    
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -174,20 +194,20 @@ jTextField1.setText("");
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Atividad.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(actividad.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Atividad.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(actividad.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Atividad.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(actividad.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Atividad.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(actividad.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Atividad().setVisible(true);
+                new actividad().setVisible(true);
             }
         });
     }
@@ -196,6 +216,7 @@ jTextField1.setText("");
     private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextField1;

@@ -10,7 +10,7 @@ import aaron.*;
 
 /**
  *
- * @author Aaron
+ * @author Axel
  */
 public class Actividad01Saludo {
     public static void main(String[] args) {

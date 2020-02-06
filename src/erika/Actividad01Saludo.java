@@ -1,4 +1,4 @@
-package diego;
+package erika;
 
 import aaron.*;
 
@@ -14,6 +14,6 @@ import aaron.*;
  */
 public class Actividad01Saludo {
     public static void main(String[] args) {
-        System.out.println("Holaaaaaa");
+        System.out.println("Me gusta mucho Avril");
     }
 }

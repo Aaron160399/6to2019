@@ -24,66 +24,16 @@ public class NewJFrame extends javax.swing.JFrame {
         initComponents();
         jTree1.setModel(loadTree());
         jTree2.setModel(loadTree2());
-        DefaultTreeModel df = (DefaultTreeModel) jTree2.getModel();
-        String n = df.getChild(main2, 0).toString().toLowerCase();
-        System.out.println(n);
+
     }
 
     public DefaultTreeModel loadTree2() {
-        DefaultMutableTreeNode a = new DefaultMutableTreeNode("A");
-        DefaultMutableTreeNode b = new DefaultMutableTreeNode("B");
-        DefaultMutableTreeNode c = new DefaultMutableTreeNode("C");
-        DefaultMutableTreeNode d = new DefaultMutableTreeNode("D");
-        DefaultMutableTreeNode e = new DefaultMutableTreeNode("E");
-        DefaultMutableTreeNode f = new DefaultMutableTreeNode("F");
-        DefaultMutableTreeNode g = new DefaultMutableTreeNode("G");
-        DefaultMutableTreeNode h = new DefaultMutableTreeNode("H");
-        DefaultMutableTreeNode i = new DefaultMutableTreeNode("I");
-        DefaultMutableTreeNode j = new DefaultMutableTreeNode("J");
-        DefaultMutableTreeNode k = new DefaultMutableTreeNode("K");
-        DefaultMutableTreeNode l = new DefaultMutableTreeNode("L");
-        DefaultMutableTreeNode m = new DefaultMutableTreeNode("M");
-        DefaultMutableTreeNode n = new DefaultMutableTreeNode("N");
-        DefaultMutableTreeNode o = new DefaultMutableTreeNode("O");
-        DefaultMutableTreeNode p = new DefaultMutableTreeNode("P");
-        DefaultMutableTreeNode q = new DefaultMutableTreeNode("Q");
-        DefaultMutableTreeNode r = new DefaultMutableTreeNode("R");
-        DefaultMutableTreeNode s = new DefaultMutableTreeNode("S");
-        DefaultMutableTreeNode t = new DefaultMutableTreeNode("T");
-        DefaultMutableTreeNode u = new DefaultMutableTreeNode("U");
-        DefaultMutableTreeNode v = new DefaultMutableTreeNode("V");
-        DefaultMutableTreeNode w = new DefaultMutableTreeNode("W");
-        DefaultMutableTreeNode x = new DefaultMutableTreeNode("X");
-        DefaultMutableTreeNode y = new DefaultMutableTreeNode("Y");
-        DefaultMutableTreeNode z = new DefaultMutableTreeNode("Z");
 
-        main2.add(a);
-        main2.add(b);
-        main2.add(c);
-        main2.add(d);
-        main2.add(e);
-        main2.add(f);
-        main2.add(g);
-        main2.add(h);
-        main2.add(i);
-        main2.add(j);
-        main2.add(k);
-        main2.add(l);
-        main2.add(m);
-        main2.add(n);
-        main2.add(o);
-        main2.add(p);
-        main2.add(q);
-        main2.add(r);
-        main2.add(s);
-        main2.add(t);
-        main2.add(u);
-        main2.add(v);
-        main2.add(w);
-        main2.add(x);
-        main2.add(y);
-        main2.add(z);
+        for (char i = 'a'; i <= 'z'; i++) {
+            DefaultMutableTreeNode add = new DefaultMutableTreeNode(i);
+            main2.add(add);
 
+        }
         DefaultTreeModel model = new DefaultTreeModel(main2);
         return model;
     }
@@ -245,22 +195,24 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-        for (int i = 0; i < 27; i++) {
-            DefaultTreeModel df = (DefaultTreeModel) jTree2.getModel();
-            String n = df.getChild(main2, i).toString().toLowerCase();
-            String palabra = jTextField2.getText();
-            String primera = palabra.substring(0,1);
-            if (n.equals(primera)) {
-                DefaultMutableTreeNode node = new DefaultMutableTreeNode(palabra);
-                DefaultMutableTreeNode dod = new DefaultMutableTreeNode(""+n);
-                dod.add(node);
-                df.insertNodeInto(dod, main2, 0);
-                i=28;
-            }
-        }
-
+        order();
 
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    public void order() {
+        String palabra = jTextField2.getText().toLowerCase();
+        String palabra2 = jTextField2.getText();
+        DefaultTreeModel df = (DefaultTreeModel) jTree2.getModel();
+        for (int i = 0; i < main2.getChildCount(); i++) {
+            String letra = main2.getChildAt(i).toString();
+            if (palabra.startsWith(letra)) {
+                DefaultMutableTreeNode parent = (DefaultMutableTreeNode) main2.getChildAt(i);
+                DefaultMutableTreeNode child = new DefaultMutableTreeNode(palabra2);
+                df.insertNodeInto(child, parent, 0);
+            }
+
+        }
+    }
 
     public void addCat() {
         DefaultTreeModel df = (DefaultTreeModel) jTree1.getModel();

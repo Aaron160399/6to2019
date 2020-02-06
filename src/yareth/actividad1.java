@@ -41,7 +41,7 @@ public class actividad1 extends javax.swing.JFrame {
         
         for (int i = 0; i < mainNode.getChildCount(); i++) {
             String letter =mainNode.getChildAt(i).toString();
-            if(text.startsWith(letter)){
+            if(text.substring(0,1).equalsIgnoreCase(letter)){
                 DefaultMutableTreeNode parent = (DefaultMutableTreeNode)mainNode.getChildAt(i);
                 DefaultMutableTreeNode child = new DefaultMutableTreeNode(text);
                 model.insertNodeInto(child, parent, 0);

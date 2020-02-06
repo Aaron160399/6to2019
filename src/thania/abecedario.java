@@ -6,7 +6,9 @@
 
 package thania;
 
+import javax.swing.ImageIcon;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
 
 /**
@@ -47,6 +49,13 @@ public class abecedario extends javax.swing.JFrame {
            
        }
    }
+   public void customTree(){
+       DefaultTreeCellRenderer render = (DefaultTreeCellRenderer)jTree1.getCellRenderer();
+       render.setLeafIcon(new ImageIcon(getClass().getResource("/img/file.png")));
+       render.setOpenIcon(new ImageIcon(getClass().getResource("/img/openfolder.png")));
+       render.setClosedIcon(new ImageIcon(getClass().getResource("/img/closefolder.png")));
+   }
+
 
    
     /** This method is called from within the constructor to

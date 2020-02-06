@@ -42,14 +42,16 @@ public void order(){
         //Obtengo el valor de cada nodo
         String letter = mainNode.getChildAt(i).toString();
         //Si las primeras letras coinciden
-        if (text.startsWith(letter)) {
+//        if (text.startsWith(letter)) {     ESTE ES PARA QUE SE GUARDE CON LA LETRA QUE ESTÁ EXACTAMENTE EN EL PADRE
+//Este es de sin importancia
+            if(text.substring(0,1).equalsIgnoreCase(letter)){
             //Obtengo el nodo con el que coincide
            DefaultMutableTreeNode parent = (DefaultMutableTreeNode)mainNode.getChildAt(i); 
            //Creo un hijo
            DefaultMutableTreeNode child = new DefaultMutableTreeNode(text); 
            //Lo agrego
            model.insertNodeInto(child, parent, 0);
-
+jTextField1.setText("");
         }
         
 

@@ -212,7 +212,7 @@ DefaultMutableTreeNode mainNode1=new DefaultMutableTreeNode("Letras");
         String text=jTextField3.getText();  
          for (int i = 0; i < mainNode1.getChildCount(); i++) {
              String letter=mainNode1.getChildAt(i).toString();
-             if (text.startsWith(letter)) {
+             if (text.substring(0,1).equalsIgnoreCase(letter)) {
                 DefaultMutableTreeNode parent = (DefaultMutableTreeNode)mainNode1.getChildAt(i);
                 DefaultMutableTreeNode child = new DefaultMutableTreeNode(text);
                 model2.insertNodeInto(child, parent, 0);

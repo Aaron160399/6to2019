@@ -5,7 +5,9 @@
  */
 package aaron;
 
+import javax.swing.ImageIcon;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
 
 /**
@@ -20,6 +22,7 @@ public class ABCTree extends javax.swing.JFrame {
     public ABCTree() {
         initComponents();
         jTree1.setModel(loadTree());
+        customTree();
     }
     
     public DefaultTreeModel loadTree(){
@@ -51,6 +54,18 @@ public class ABCTree extends javax.swing.JFrame {
             }
             
         }
+    }
+    
+    public void customTree(){
+        DefaultTreeCellRenderer render = (DefaultTreeCellRenderer)jTree1.getCellRenderer();
+        //Icono de hijo
+        render.setLeafIcon(new ImageIcon(getClass().getResource("/img/file.png")));
+        //Icono de padre (Abierto)
+        render.setOpenIcon(new ImageIcon(getClass().getResource("/img/openfolder.png")));
+        //Icono de padre (cerrado)
+        render.setClosedIcon(new ImageIcon(getClass().getResource("/img/closefolder.png")));
+        
+//        jTree2.setCellRenderer(render);
     }
 
     /**

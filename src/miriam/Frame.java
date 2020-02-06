@@ -15,6 +15,7 @@ import javax.swing.tree.DefaultTreeModel;
 public class Frame extends javax.swing.JFrame {
 DefaultMutableTreeNode mainNode=new DefaultMutableTreeNode("categories");
 DefaultMutableTreeNode mainNode1=new DefaultMutableTreeNode("Letras");
+ DefaultMutableTreeNode a;
     /**
      * Creates new form Frame
      */
@@ -42,61 +43,10 @@ DefaultMutableTreeNode mainNode1=new DefaultMutableTreeNode("Letras");
         return model;
     }
      public DefaultTreeModel loadTree1(){
-        DefaultMutableTreeNode a = new DefaultMutableTreeNode("A");
-        DefaultMutableTreeNode b = new DefaultMutableTreeNode("B");
-        DefaultMutableTreeNode c = new DefaultMutableTreeNode("C");
-        DefaultMutableTreeNode d = new DefaultMutableTreeNode("D");
-        DefaultMutableTreeNode e = new DefaultMutableTreeNode("E");
-        DefaultMutableTreeNode f = new DefaultMutableTreeNode("F");
-        DefaultMutableTreeNode g = new DefaultMutableTreeNode("G");
-        DefaultMutableTreeNode h = new DefaultMutableTreeNode("H");
-        DefaultMutableTreeNode i = new DefaultMutableTreeNode("I");
-        DefaultMutableTreeNode j = new DefaultMutableTreeNode("J");
-        DefaultMutableTreeNode k = new DefaultMutableTreeNode("K");
-        DefaultMutableTreeNode l = new DefaultMutableTreeNode("L");
-        DefaultMutableTreeNode m = new DefaultMutableTreeNode("M");
-        DefaultMutableTreeNode n = new DefaultMutableTreeNode("N");
-        DefaultMutableTreeNode o = new DefaultMutableTreeNode("O");
-        DefaultMutableTreeNode p = new DefaultMutableTreeNode("P");
-        DefaultMutableTreeNode q = new DefaultMutableTreeNode("Q");
-        DefaultMutableTreeNode r = new DefaultMutableTreeNode("R");
-        DefaultMutableTreeNode s = new DefaultMutableTreeNode("S");
-        DefaultMutableTreeNode t = new DefaultMutableTreeNode("T");
-        DefaultMutableTreeNode u = new DefaultMutableTreeNode("U");
-        DefaultMutableTreeNode v = new DefaultMutableTreeNode("V");
-        DefaultMutableTreeNode w = new DefaultMutableTreeNode("W");
-        DefaultMutableTreeNode x = new DefaultMutableTreeNode("X");
-        DefaultMutableTreeNode y = new DefaultMutableTreeNode("Y");
-        DefaultMutableTreeNode z = new DefaultMutableTreeNode("Z");
-        
-        
-        mainNode1.add(a);
-        mainNode1.add(b);
-        mainNode1.add(c);
-        mainNode1.add(d);
-        mainNode1.add(e);
-        mainNode1.add(f);
-        mainNode1.add(g);
-        mainNode1.add(h);
-        mainNode1.add(i);
-        mainNode1.add(j);
-        mainNode1.add(k);
-        mainNode1.add(l);
-        mainNode1.add(m);
-        mainNode1.add(n);
-        mainNode1.add(o);
-        mainNode1.add(p);
-        mainNode1.add(q);
-        mainNode1.add(r);
-        mainNode1.add(s);
-        mainNode1.add(t);
-        mainNode1.add(u);
-        mainNode1.add(v);
-        mainNode1.add(w);
-        mainNode1.add(x);
-        mainNode1.add(y);
-        mainNode1.add(z);
-      
+         for (char i = 'a'; i <='z'; i++) {
+             DefaultMutableTreeNode childNode = new DefaultMutableTreeNode(i);
+             mainNode1.add(childNode);
+         }
         DefaultTreeModel model1 = new DefaultTreeModel(mainNode1);
         return model1;
     }
@@ -259,18 +209,16 @@ DefaultMutableTreeNode mainNode1=new DefaultMutableTreeNode("Letras");
      public void addName(){
        
         DefaultTreeModel model2 = (DefaultTreeModel)jTree2.getModel();
-        String name=jTextField3.getText();
-         DefaultMutableTreeNode node1 = new DefaultMutableTreeNode(name);
-         if (name.startsWith("a", 0)) {
-             model2.getChild(model2, 0).toString();
-             model2.insertNodeInto(node1, mainNode1, 0); 
+        String text=jTextField3.getText();  
+         for (int i = 0; i < mainNode1.getChildCount(); i++) {
+             String letter=mainNode1.getChildAt(i).toString();
+             if (text.startsWith(letter)) {
+                DefaultMutableTreeNode parent = (DefaultMutableTreeNode)mainNode1.getChildAt(i);
+                DefaultMutableTreeNode child = new DefaultMutableTreeNode(text);
+                model2.insertNodeInto(child, parent, 0);
+             }
          }
-       
-        
-        
-       
-        
-       // model2.getChild(mainNode1, 0);
+      
     }
     /**
      * @param args the command line arguments

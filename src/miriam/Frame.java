@@ -32,9 +32,9 @@ DefaultMutableTreeNode mainNode1=new DefaultMutableTreeNode("Letras");
         //ICONO DE HIJO
         render.setLeafIcon(new ImageIcon(getClass().getResource("/img/file.png")));
         //ICONO DE PADRE (ABIERTO)
-        render.setOpenIcon(new ImageIcon(getClass().getResource("/img/file.png")));
+        render.setOpenIcon(new ImageIcon(getClass().getResource("/img/openfolder.png")));
         //ICONO DE PADRE (CERRADO)
-        render.setClosedIcon(new ImageIcon(getClass().getResource("/img/file.png")));
+        render.setClosedIcon(new ImageIcon(getClass().getResource("/img/closefolder.png")));
     }
     
     public DefaultTreeModel loadTree(){

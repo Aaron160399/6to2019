@@ -10,6 +10,7 @@ import javax.swing.tree.DefaultTreeModel;
  */
 public class Actividad extends javax.swing.JFrame {
     DefaultMutableTreeNode mainNode = new DefaultMutableTreeNode("categories");
+    DefaultMutableTreeNode mainNode2 = new DefaultMutableTreeNode("Letras");
     
     
     public Actividad() {
@@ -40,36 +41,12 @@ public class Actividad extends javax.swing.JFrame {
     }
     
     public DefaultTreeModel loadTree2(){
-        DefaultMutableTreeNode a = new DefaultMutableTreeNode("A");
-        DefaultMutableTreeNode b = new DefaultMutableTreeNode("B");
-        DefaultMutableTreeNode c = new DefaultMutableTreeNode("C");
-        DefaultMutableTreeNode d = new DefaultMutableTreeNode("D");
-        DefaultMutableTreeNode e = new DefaultMutableTreeNode("E");
-        DefaultMutableTreeNode f = new DefaultMutableTreeNode("F");
-        DefaultMutableTreeNode g = new DefaultMutableTreeNode("G");
-        DefaultMutableTreeNode h = new DefaultMutableTreeNode("H");
-        DefaultMutableTreeNode i = new DefaultMutableTreeNode("I");
-        DefaultMutableTreeNode j = new DefaultMutableTreeNode("J");
-        DefaultMutableTreeNode k = new DefaultMutableTreeNode("K");
-        DefaultMutableTreeNode l = new DefaultMutableTreeNode("L");
-        DefaultMutableTreeNode m = new DefaultMutableTreeNode("M");
-        DefaultMutableTreeNode n = new DefaultMutableTreeNode("N");
-        DefaultMutableTreeNode o = new DefaultMutableTreeNode("O");
-        DefaultMutableTreeNode p = new DefaultMutableTreeNode("P");
-        DefaultMutableTreeNode q = new DefaultMutableTreeNode("Q");
-        DefaultMutableTreeNode r = new DefaultMutableTreeNode("R");
-        DefaultMutableTreeNode s = new DefaultMutableTreeNode("S");
-        DefaultMutableTreeNode t = new DefaultMutableTreeNode("T");
-        DefaultMutableTreeNode u = new DefaultMutableTreeNode("U");
-        DefaultMutableTreeNode v = new DefaultMutableTreeNode("V");
-        DefaultMutableTreeNode w = new DefaultMutableTreeNode("W");
-        DefaultMutableTreeNode x = new DefaultMutableTreeNode("X");
-        DefaultMutableTreeNode y = new DefaultMutableTreeNode("Y");
-        DefaultMutableTreeNode z = new DefaultMutableTreeNode("Z");
-        
-        DefaultTreeModel model = new DefaultTreeModel(mainNode);
-        return model;
-
+        for(char i = 'a'; i<='z'; i++) {
+            DefaultMutableTreeNode childNode  = new DefaultMutableTreeNode(i);
+            mainNode2.add(childNode);
+        }
+        DefaultTreeModel modelo = new DefaultTreeModel(mainNode2);
+        return modelo;
     }
 
    
@@ -225,7 +202,7 @@ public class Actividad extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        addAbecedario();
+        ordenar();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     public void addCategory(){
@@ -235,30 +212,22 @@ public class Actividad extends javax.swing.JFrame {
         model.insertNodeInto(node, mainNode, 0);
     }
    
-    public void addAbecedario(){
+    public void ordenar(){
+        //Obtengo el texto de mi textField
+        String nombre = jTextField3.getText();
+        //Obtengo el modelo de mi jTree
         DefaultTreeModel model = (DefaultTreeModel)jTree2.getModel();
-        String category = jTextField1.getText();
-        String nombre = jTextField3.getText().substring(0);
-        
-        char nombre2 = 0;
-        
-        char caracter = 'a';
-        char i; 
-        
-        for (i = 'a'; i <= 'z'; i++) {
-            caracter++;
+        //Recorro el jTree nodo por nodo
+        for (int i = 0; i < mainNode2.getChildCount(); i++) {
+            String letra = mainNode2.getChildAt(i).toString();
+            if (nombre.substring(0, 1).equalsIgnoreCase(letra)){
+               DefaultMutableTreeNode parent = (DefaultMutableTreeNode)mainNode2.getChildAt(i);
+               DefaultMutableTreeNode child = new DefaultMutableTreeNode(nombre);
+               model.insertNodeInto(child, parent, 0);
+            }
         }
-        
-        if(i==nombre2) {
 
-
-//        for (char i = 'a'; i < 'z'; i++) {
-//            System.out.println(caracter);
-//            caracter++;
-//            System.out.println(caracter);
-//        }
-
-        }}
+        }
 
 
 

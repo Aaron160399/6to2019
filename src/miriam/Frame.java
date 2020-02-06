@@ -5,7 +5,9 @@
  */
 package miriam;
 
+import javax.swing.ImageIcon;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
 
 /**
@@ -25,6 +27,16 @@ DefaultMutableTreeNode mainNode1=new DefaultMutableTreeNode("Letras");
         jTree2.setModel(loadTree1());
         
     }
+    public void customTree(){
+        DefaultTreeCellRenderer render = (DefaultTreeCellRenderer)jTree2.getCellRenderer();
+        //ICONO DE HIJO
+        render.setLeafIcon(new ImageIcon(getClass().getResource("/img/file.png")));
+        //ICONO DE PADRE (ABIERTO)
+        render.setOpenIcon(new ImageIcon(getClass().getResource("/img/file.png")));
+        //ICONO DE PADRE (CERRADO)
+        render.setClosedIcon(new ImageIcon(getClass().getResource("/img/file.png")));
+    }
+    
     public DefaultTreeModel loadTree(){
         DefaultMutableTreeNode action = new DefaultMutableTreeNode("action");
         DefaultMutableTreeNode horror = new DefaultMutableTreeNode("horror");

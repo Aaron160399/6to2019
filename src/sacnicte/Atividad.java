@@ -5,7 +5,9 @@
  */
 package sacnicte;
 
+import javax.swing.ImageIcon;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
 
 /**
@@ -31,7 +33,17 @@ public DefaultTreeModel loadTree(){
     DefaultTreeModel model = new DefaultTreeModel(mainNode);
     return model;
 }
-
+public void customTree(){
+    DefaultTreeCellRenderer render = (DefaultTreeCellRenderer)jTree1.getCellRenderer();
+    //Icono de hijo
+    render.setLeafIcon(new ImageIcon(getClass().getResource("/img/file.png")));
+    //Icono de padre (Abierto
+    render.setOpenIcon(new ImageIcon(getClass().getResource("/img/openfolder.png")));
+    //Icono de padre (Cerrado
+    render.setClosedIcon(new ImageIcon(getClass().getResource("/img/closefolder.png")));
+    
+    //jTree.setCellRenderer(render);
+}
 public void order(){
     //Obtengo el texto de mi jtextfield
     String text = jTextField1.getText();

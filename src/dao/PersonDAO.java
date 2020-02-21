@@ -53,7 +53,7 @@ public class PersonDAO {
         Person pojo = new Person();
         try {
             con = Conexion.getConnection();
-            st = con.prepareStatement("CALL select_peson(?)");
+            st = con.prepareStatement("CALL select_person(?)");
             st.setInt(1, id);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {

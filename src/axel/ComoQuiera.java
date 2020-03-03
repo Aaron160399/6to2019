@@ -5,6 +5,10 @@
  */
 package axel;
 
+import javax.swing.DefaultListModel;
+import static javax.swing.JList.VERTICAL_WRAP;
+import javax.swing.ListSelectionModel;
+
 /**
  *
  * @author Bienvenido
@@ -18,6 +22,15 @@ public class ComoQuiera extends javax.swing.JFrame {
         initComponents();
     }
 
+    void person(){
+        DefaultListModel defaultListModel = new DefaultListModel();
+            defaultListModel.addElement(new Persona(jTextField1.getText(),Integer.parseInt(jTextField2.getText())));
+            jList1.setModel(defaultListModel);
+            jList1.setLayoutOrientation(VERTICAL_WRAP);
+            jList1.setVisibleRowCount(-1);
+            jList1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+            jList1.setCellRenderer(new JListCustomerCellRenderer());
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

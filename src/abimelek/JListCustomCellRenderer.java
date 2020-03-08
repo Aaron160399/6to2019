@@ -24,7 +24,7 @@ public class JListCustomCellRenderer extends JLabel implements ListCellRenderer<
         
         String s = value.toString();
         setText(s);
-        setIcon(new ImageIcon(getClass().getResource("/img/closedfolder.png")));
+        setIcon(new ImageIcon(getClass().getResource("img/closefolder.png")));
         if(isSelected){
             setBackground(Color.yellow);
             setBackground(Color.BLACK);

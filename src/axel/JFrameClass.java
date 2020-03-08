@@ -111,6 +111,14 @@ public class JFrameClass extends javax.swing.JFrame {
     public void addCategory(){
         DefaultTreeModel model = (DefaultTreeModel) jTree1.getModel();
         String category = jTextField1.getText();
+        String en="";
+        char pal[]= category.toCharArray();
+        
+        for (int i = 0; i <= category.length()-1; i++) {
+            int charn = pal[i];
+            en=en+charn;
+        }
+        System.out.println(en);
         DefaultMutableTreeNode node = new DefaultMutableTreeNode(category);
         model.insertNodeInto(node, mainNode, 0);
         

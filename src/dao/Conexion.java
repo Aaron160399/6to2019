@@ -25,9 +25,9 @@ public class Conexion {
 
     private static final String JDBC_BD = "imagenes";
 
-    private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
+    private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
 
-    private static final String JDBC_URL = "jdbc:mysql://" + JDBC_HOST + "/" + JDBC_BD;
+    private static final String JDBC_URL = "jdbc:mysql://" + JDBC_HOST + "/" + JDBC_BD+"?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC";
 
     private static Driver controlador = null;
 

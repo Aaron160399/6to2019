@@ -24,7 +24,7 @@ public class jajaja extends JLabel implements ListCellRenderer<Object> {
     @Override
     public Component getListCellRendererComponent(JList<? extends Object> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
         String s = value.toString();
-        setString(s);
+        setText(s);
         setIcon(new ImageIcon(getClass().getResource("/img/file.png")));
         if (isSelected) {
             setBackground(Color.red);

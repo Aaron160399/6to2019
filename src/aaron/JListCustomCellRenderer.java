@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package axel;
+package aaron;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -14,26 +14,26 @@ import javax.swing.ListCellRenderer;
 
 /**
  *
- * @author Bienvenido
+ * @author Aaron
  */
-public class JListCustomerCellRenderer extends JLabel implements ListCellRenderer<Object>{
+public class JListCustomCellRenderer extends JLabel implements ListCellRenderer<Object>{
 
     @Override
     public Component getListCellRendererComponent(JList<? extends Object> jlist, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-        String s=value.toString();
+        String s = value.toString();
         setText(s);
         setIcon(new ImageIcon(getClass().getResource("/img/file.png")));
-        if (isSelected) {
-            setBackground(Color.red);
-            setForeground(Color.cyan);
-        }else{
-            setBackground(Color.cyan);
-            setForeground(Color.red);
-        }
-        setEnabled(jlist.isEnabled);
-        setFont(jlist.getFont());
-        setOpaque(true);
-        return(this);
+         if (isSelected) {
+             setBackground(Color.CYAN);
+             setForeground(Color.BLUE);
+         } else {
+             setBackground(Color.MAGENTA);
+             setForeground(Color.RED);
+         }
+         setEnabled(jlist.isEnabled());
+         setFont(jlist.getFont());
+         setOpaque(true);
+         return this;
     }
     
 }

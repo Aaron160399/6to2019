@@ -20,7 +20,7 @@ Pan1 pan1 = new Pan1();
      */
     
      
-    }
+    
     public tresbotones() {
         initComponents();
         cargar(jPanel1);

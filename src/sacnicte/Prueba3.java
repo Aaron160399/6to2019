@@ -5,6 +5,10 @@
  */
 package sacnicte;
 
+import java.awt.Button;
+import javax.swing.DefaultListModel;
+import static javax.swing.JList.VERTICAL_WRAP;
+
 /**
  *
  * @author blanc
@@ -14,8 +18,18 @@ public class Prueba3 extends javax.swing.JFrame {
     /**
      * Creates new form Prueba3
      */
+    
     public Prueba3() {
         initComponents();
+        DefaultListModel defaultListModel = new DefaultListModel();
+        for (int i = 0; i < 10; i++) {
+            defaultListModel.addElement(new Persona("Nombre"+i,i));
+        }
+        jList1.setModel(defaultListModel);
+        jList1.setLayoutOrientation(VERTICAL_WRAP);
+        jList1.setVisibleRowCount(-1);
+        jList1.setSelectionMode(ListSelectionMode.SINGLE_SELECTION);
+        jList1.setCellRenderer(new JListCustomCellRenderer());
     }
 
     /**

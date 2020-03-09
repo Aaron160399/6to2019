@@ -30,7 +30,7 @@ public class JListCustomerCellRenderer extends JLabel implements ListCellRendere
             setBackground(Color.cyan);
             setForeground(Color.red);
         }
-        setEnabled(jlist.isEnabled);
+        setEnabled(jlist.isEnabled());
         setFont(jlist.getFont());
         setOpaque(true);
         return(this);

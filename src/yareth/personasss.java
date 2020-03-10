@@ -31,6 +31,12 @@ public class personasss extends javax.swing.JFrame {
         jList1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         jList1.setCellRenderer(new sacnicte.JListCustomCellRenderer());
     }
+    void cargarInfo(){
+        DefaultListModel model = (DefaultListModel)jList1.getModel();
+        Persona persona = (Persona)model.getElementAt(jList1.getSelectedIndex());
+        jTextField1.setText(persona.getNombre());
+        jTextField2.setText(persona.getEdad()+"");
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -55,6 +61,11 @@ public class personasss extends javax.swing.JFrame {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
+        });
+        jList1.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jList1ValueChanged(evt);
+            }
         });
         jScrollPane1.setViewportView(jList1);
 
@@ -100,6 +111,11 @@ public class personasss extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
+        // TODO add your handling code here:
+        cargarInfo();
+    }//GEN-LAST:event_jList1ValueChanged
 
     /**
      * @param args the command line arguments

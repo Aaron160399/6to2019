@@ -22,7 +22,7 @@ public class JListCustomerCellRenderer extends JLabel implements ListCellRendere
     public Component getListCellRendererComponent(JList<? extends Object> jlist, Object value, int index, boolean isSelected, boolean cellHasFocus) {
         String s=value.toString();
         setText(s);
-        setIcon(new ImageIcon(getClass().getResource("/img/file.png")));
+        setIcon(new ImageIcon(getClass().getResource("/img/closefolder.png")));
         if (isSelected) {
             setBackground(Color.red);
             setForeground(Color.cyan);
@@ -30,7 +30,7 @@ public class JListCustomerCellRenderer extends JLabel implements ListCellRendere
             setBackground(Color.cyan);
             setForeground(Color.red);
         }
-        setEnabled(jlist.isEnabled);
+        setEnabled(jlist.isEnabled());
         setFont(jlist.getFont());
         setOpaque(true);
         return(this);

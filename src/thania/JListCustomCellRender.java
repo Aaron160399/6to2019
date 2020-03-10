@@ -19,25 +19,26 @@ import javax.swing.ListCellRenderer;
  */
 public class JListCustomCellRender extends JLabel implements ListCellRenderer<Object>{
 
+     
+  
     @Override
-    public Component getListCellRendererComponent(JList<?extends Object> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-        String s= value.toString();
+    public Component getListCellRendererComponent(JList<? extends Object> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+        String s=value.toString();
         setText(s);
-       setIcon(new ImageIcon(getClass().getResource("/img/file.png")));
-       if(isSelected){
-           setBackground(Color.cyan);
-           setForeground(Color.blue);
-       }else{
-           setBackground(Color.magenta);
-           setForeground(Color.red);
-       }
-        setEnabled(list.isEnabled);
+        setIcon(new ImageIcon(getClass().getResource("/img/file.png")));
+        if (isSelected) {
+            setBackground(Color.cyan);
+            setForeground(Color.blue);
+        }else{
+            setBackground(Color.magenta);
+            setForeground(Color.red);
+        }
+        setEnabled(list.isEnabled());
         setFont(list.getFont());
         setOpaque(true);
         return(this);
         
     }
-    
             
     
 }

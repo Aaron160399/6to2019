@@ -5,9 +5,11 @@
  */
 package carlos;
 
+import aaron.JListCustomCellRenderer;
 import javax.swing.DefaultListModel;
 import static javax.swing.JList.VERTICAL_WRAP;
 import javax.swing.ListSelectionModel;
+import thania.JListCustomCellRender;
 
 /**
  *
@@ -28,7 +30,11 @@ public class Jframe extends javax.swing.JFrame {
         jList1.setLayoutOrientation(VERTICAL_WRAP);
         jList1.setVisibleRowCount(-1);
        jList1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-       jList1.setCellRenderer(new JListCellRenderer());
+<<<<<<< HEAD
+       jList1.setCellRenderer(new JListCustomCellRenderer());
+=======
+       jList1.setCellRenderer(new JListCustomCellRender());
+>>>>>>> 18fcd704d1bfee31c4d9bc53c31862c9ca614a2e
 
     }
     
@@ -55,6 +61,11 @@ public class Jframe extends javax.swing.JFrame {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
+        });
+        jList1.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jList1ValueChanged(evt);
+            }
         });
         jScrollPane1.setViewportView(jList1);
 
@@ -98,6 +109,11 @@ public class Jframe extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
+        // TODO add your handling code here:
+    
+    }//GEN-LAST:event_jList1ValueChanged
 
     /**
      * @param args the command line arguments

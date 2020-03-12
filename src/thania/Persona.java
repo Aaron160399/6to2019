@@ -3,29 +3,27 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package miriam;
+package thania;
 
 /**
  *
- * @author 52229
+ * @author lizbe
  */
 public class Persona {
+    
     private String nombre;
-    private int edad;
+    private double edad;
 
-    public Persona() {
-    }
-
-    public Persona(String nombre, int edad) {
+    public Persona(String nombre, double edad) {
         this.nombre = nombre;
         this.edad = edad;
     }
 
-    public int getEdad() {
+    public double getEdad() {
         return edad;
     }
 
-    public void setEdad(int edad) {
+    public void setEdad(double edad) {
         this.edad = edad;
     }
 
@@ -36,9 +34,10 @@ public class Persona {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
+    
     @Override
-    public String toString() {
-      return getNombre();
-    }  
+    public String toString(){
+     return getNombre();
+        
+    }
 }

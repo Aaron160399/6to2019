@@ -3,29 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package miriam;
+package yareth;
 
 /**
  *
- * @author 52229
+ * @author hp
  */
-public class Persona {
-    private String nombre;
+public class personas {
+      private String nombre;
     private int edad;
 
-    public Persona() {
+    public personas() {
     }
 
-    public Persona(String nombre, int edad) {
+    public personas(String nombre, int edad) {
         this.nombre = nombre;
-        this.edad = edad;
-    }
-
-    public int getEdad() {
-        return edad;
-    }
-
-    public void setEdad(int edad) {
         this.edad = edad;
     }
 
@@ -37,8 +29,14 @@ public class Persona {
         this.nombre = nombre;
     }
 
-    @Override
-    public String toString() {
-      return getNombre();
-    }  
+    public int getEdad() {
+        return edad;
+    }
+
+    public void setEdad(int edad) {
+        this.edad = edad;
+    }
+    
 }
+
+

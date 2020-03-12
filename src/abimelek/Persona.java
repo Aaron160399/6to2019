@@ -3,14 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package miriam;
+package abimelek;
+
+import pojo.*;
+import java.sql.Blob;
 
 /**
  *
- * @author 52229
+ * @author bienvenidos
  */
 public class Persona {
-    private String nombre;
+    private String nombre ; 
     private int edad;
 
     public Persona() {
@@ -21,14 +24,7 @@ public class Persona {
         this.edad = edad;
     }
 
-    public int getEdad() {
-        return edad;
-    }
-
-    public void setEdad(int edad) {
-        this.edad = edad;
-    }
-
+    
     public String getNombre() {
         return nombre;
     }
@@ -37,8 +33,13 @@ public class Persona {
         this.nombre = nombre;
     }
 
-    @Override
-    public String toString() {
-      return getNombre();
-    }  
+    public int getEdad() {
+        return edad;
+    }
+
+    public void setEdad(int edad) {
+        this.edad = edad;
+    }
+    
+    
 }

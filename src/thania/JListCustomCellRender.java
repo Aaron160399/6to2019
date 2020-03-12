@@ -3,25 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sacnicte;
+package thania;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.List;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
-import javax.swing.text.StyleConstants;
 
 /**
  *
- * @author blanc
+ * @author lizbe
  */
-public class JListCustomCellRenderer extends JLabel implements ListCellRenderer<Object>{
-    
-    public JListCustomCellRenderer() {
-    }
+public class JListCustomCellRender extends JLabel implements ListCellRenderer<Object>{
 
+     
+  
     @Override
     public Component getListCellRendererComponent(JList<? extends Object> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
         String s=value.toString();
@@ -40,6 +39,6 @@ public class JListCustomCellRenderer extends JLabel implements ListCellRenderer<
         return(this);
         
     }
+            
     
 }
-

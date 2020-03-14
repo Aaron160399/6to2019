@@ -29,7 +29,11 @@ DELIMITER $$
 -- Procedimientos
 --
 DROP PROCEDURE IF EXISTS `insert_person`$$
+<<<<<<< HEAD
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_person` (IN `name` VARCHAR(255), IN `image` LONGBLOB)  BEGIN
+=======
 CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_person` (IN `name` varchar(255), IN `image` LONGBLOB)  BEGIN
+>>>>>>> 014c32ef3c54feb7f6ad61849381ed66405d790a
 	INSERT INTO persona (imagen, nombre) VALUES(image, name);
 END$$
 

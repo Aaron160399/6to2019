@@ -10,6 +10,7 @@ package martin;
  * @author MartinPC
  */
 public class p {
+
     private String nombre;
     private String edad;
 
@@ -36,6 +37,10 @@ public class p {
     public String getNombre() {
         return nombre;
     }
-    
-   
+
+    @Override
+    public String toString() {
+        return getNombre();
+    }
+
 }

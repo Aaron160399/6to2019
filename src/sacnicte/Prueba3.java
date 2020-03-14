@@ -5,6 +5,11 @@
  */
 package sacnicte;
 
+import java.awt.Button;
+import javax.swing.DefaultListModel;
+import static javax.swing.JList.VERTICAL_WRAP;
+import javax.swing.ListSelectionModel;
+
 /**
  *
  * @author blanc
@@ -14,8 +19,18 @@ public class Prueba3 extends javax.swing.JFrame {
     /**
      * Creates new form Prueba3
      */
+    
     public Prueba3() {
         initComponents();
+        DefaultListModel defaultListModel = new DefaultListModel();
+        for (int i = 0; i < 10; i++) {
+            defaultListModel.addElement(new Persona("Nombre"+i,i));
+        }
+        jList1.setModel(defaultListModel);
+        jList1.setLayoutOrientation(VERTICAL_WRAP);
+        jList1.setVisibleRowCount(-1);
+        jList1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        jList1.setCellRenderer(new miriam.JListCustomCellRenderer());
     }
 
     /**
@@ -27,13 +42,13 @@ public class Prueba3 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTextField2 = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -66,11 +81,8 @@ public class Prueba3 extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(29, 29, 29)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(47, Short.MAX_VALUE))
+                    .addComponent(jLabel2))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -82,9 +94,7 @@ public class Prueba3 extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabel2)
                 .addContainerGap(72, Short.MAX_VALUE))
         );
 

@@ -201,6 +201,11 @@ public class Actividad04 extends javax.swing.JFrame {
         jRadioButton1.setText("pegar");
 
         jRadioButton2.setText("copiar");
+        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton2ActionPerformed(evt);
+            }
+        });
 
         jButton6.setText("continuar");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -319,6 +324,10 @@ public class Actividad04 extends javax.swing.JFrame {
     }    
         
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton2ActionPerformed
 
     /**
      * @param args the command line arguments

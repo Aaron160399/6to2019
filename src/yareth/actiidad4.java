@@ -6,6 +6,10 @@
 package yareth;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.channels.FileChannel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -37,8 +41,40 @@ String abrirFileChouser(){
     
     
 }
+void verify(String url){
+        File file = new File(url);
+        if(file.exists()){
+            enviarmensaje("el directorio ya existe");
+            
+        }else{
+            if(file.mkdirs()){
+            enviarmensaje("el directorio se creo exitosamente");
+            }else{
+                
+            }
+
+        }
+}
 
 
+void copiar(String sourceURL, String pathURL) throws  FileNotFoundException,IOException{
+     File source = new File (sourceURL);
+     FileChannel fileInputStream = new FileOutputStream (source).getChannel();
+     String output = pathURL+"\\"+source.getName();
+     FileChannel fileOutputStream = new FileOutputStream(output).getChannel();
+        fileOutputStream.transferFrom(fileInputStream, 0, fileInputStream.size());
+        if(fileInputStream !=null){
+            fileInputStream.close();
+        }
+        if(fileOutputStream !=null){
+            fileOutputStream.close();
+        }
+        if(jRadioButton2.isSelected()){
+            source.delete();
+        }
+        
+    }
+     
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -115,6 +151,11 @@ String abrirFileChouser(){
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Direcciones"));
 
         jButton3.setText("crear");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -144,14 +185,29 @@ String abrirFileChouser(){
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Operaciones"));
 
         jButton4.setText("de");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("a");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jRadioButton1.setText("copiar");
 
         jRadioButton2.setText("pegar");
 
         jButton6.setText("continuar");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -228,7 +284,8 @@ String abrirFileChouser(){
         // TODO add your handling code here:
         
         jTextField1.setText(abrirFileChouser());
-        
+    
+    
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -240,6 +297,38 @@ String abrirFileChouser(){
             enviarmensaje("Es un archivo");
     }//GEN-LAST:event_jButton2ActionPerformed
     }
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here
+        
+         verify(jTextField2.getText());
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        jTextField3.setText(abrirFileChouser());
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        jTextField4.setText(abrirFileChouser());
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+      try{
+        // TODO add your handling code here:
+        copiar(jTextField4.getText(),jTextField3.getText());
+       enviarmensaje("operacion exitosa");
+   } catch(IOException ex){
+        System.out.println("error"+ex);
+    }    
+        
+    }//GEN-LAST:event_jButton6ActionPerformed
+  
     /**
      * @param args the command line arguments
      */
@@ -293,3 +382,4 @@ String abrirFileChouser(){
     private javax.swing.JTextField jTextField4;
     // End of variables declaration//GEN-END:variables
 }
+

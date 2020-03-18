@@ -8,6 +8,7 @@ package thania;
 import javax.swing.DefaultListModel;
 import static javax.swing.JList.VERTICAL_WRAP;
 import javax.swing.ListSelectionModel;
+import miriam.JListCustomCellRenderer;
 
 /**
  *
@@ -29,7 +30,7 @@ public class Actividad03 extends javax.swing.JFrame {
         jList1.setLayoutOrientation(VERTICAL_WRAP);
         jList1.setVisibleRowCount(-1);
         jList1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        jList1.setCellRenderer(new JListCustomCellRendere());
+        jList1.setCellRenderer(new JListCustomCellRenderer());
         
     }
 

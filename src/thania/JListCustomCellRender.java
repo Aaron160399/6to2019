@@ -31,7 +31,7 @@ public class JListCustomCellRender extends JLabel implements ListCellRenderer<Ob
            setBackground(Color.magenta);
            setForeground(Color.red);
        }
-        setEnabled(list.isEnabled);
+        setEnabled(list.isEnabled());
         setFont(list.getFont());
         setOpaque(true);
         return(this);

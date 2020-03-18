@@ -285,11 +285,11 @@ public class claseFile extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        try{
-            copy(jTextField3.getText(),jTextField4.getText());
+        try {
+            copy(jTextField3.getText(), jTextField4.getText());
             enviarMensaje("dale papa, bien ");
-        }catch(IOException ex){
-            System.out.println("error: "+ex);
+        } catch (IOException ex) {
+            System.out.println("error: " + ex);
         }
     }//GEN-LAST:event_jButton6ActionPerformed
 
@@ -297,12 +297,12 @@ public class claseFile extends javax.swing.JFrame {
         File file = new File(sourceURL);
         FileChannel fileInputStream = new FileInputStream(file).getChannel();
         String output = pathURL + "\\" + file.getName();
-        FileChannel  outputStream = new FileOutputStream(output).getChannel();
-        outputStream.transferFrom(fileInputStream,0,fileInputStream.size());
-        if (fileInputStream!=null) {
+        FileChannel outputStream = new FileOutputStream(output).getChannel();
+        outputStream.transferFrom(fileInputStream, 0, fileInputStream.size());
+        if (fileInputStream != null) {
             fileInputStream.close();
         }
-        if (outputStream!=null) {
+        if (outputStream != null) {
             outputStream.close();
         }
         if (jRadioButton2.isSelected()) {

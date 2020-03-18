@@ -6,6 +6,13 @@
 package erika;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.channels.FileChannel;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -22,8 +29,37 @@ public class Actividad4 extends javax.swing.JFrame {
         initComponents();
     }
     
+    
     void enviarMensaje(String mensaje){
         JOptionPane.showMessageDialog(null, mensaje);
+    }
+    
+    void copiar(String sourceURL, String pathURL) throws FileNotFoundException, IOException{
+        File source = new File(sourceURL);
+        FileChannel fileInputStream = new FileInputStream(source).getChannel();
+        String output = pathURL + "\\"+ source.getName();
+        FileChannel fileOutputStream = new FileOutputStream(output).getChannel();
+        fileOutputStream.transferFrom(fileInputStream, 0, fileInputStream.size());
+        if(fileInputStream != null) {
+            fileInputStream.close();
+        }
+        if(fileInputStream != null){
+            fileOutputStream.close();
+        }
+        if(jRadioButton2.isSelected()){
+            source.delete();
+        }
+    }
+    
+    void verificar(String url){
+        File file = new File(url);
+        if(file.exists()){
+            enviarMensaje("The directory already exists");
+        }else{
+            if(file.mkdir()){
+                enviarMensaje("The directory was created successfully");
+            }
+        }
     }
     
     String abrirFileChooser(){
@@ -111,10 +147,25 @@ public class Actividad4 extends javax.swing.JFrame {
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Operaciones"));
 
         jButton3.setText("De");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
-        jButton7.setText("Crear");
+        jButton7.setText("Continuar");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         jButton8.setText("A");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
 
         jRadioButton1.setText("Copiar");
         jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -123,7 +174,7 @@ public class Actividad4 extends javax.swing.JFrame {
             }
         });
 
-        jRadioButton2.setText("Pegar");
+        jRadioButton2.setText("Cut");
         jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButton2ActionPerformed(evt);
@@ -153,8 +204,8 @@ public class Actividad4 extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                    .addContainerGap(229, Short.MAX_VALUE)
-                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(205, Short.MAX_VALUE)
+                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(9, 9, 9)))
         );
         jPanel3Layout.setVerticalGroup(
@@ -172,10 +223,10 @@ public class Actividad4 extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jRadioButton1)
                     .addComponent(jRadioButton2))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                    .addContainerGap(94, Short.MAX_VALUE)
+                    .addContainerGap(98, Short.MAX_VALUE)
                     .addComponent(jButton7)
                     .addContainerGap()))
         );
@@ -183,6 +234,11 @@ public class Actividad4 extends javax.swing.JFrame {
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Direcciones"));
 
         jButton6.setText("Crear");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -229,7 +285,7 @@ public class Actividad4 extends javax.swing.JFrame {
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -266,6 +322,28 @@ public class Actividad4 extends javax.swing.JFrame {
             enviarMensaje("Es un archivo");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        verificar(jTextField5.getText());
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        jTextField2.setText(abrirFileChooser());
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        jTextField6.setText(abrirFileChooser());
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        try{
+            copiar(jTextField2.getText(), jTextField6.getText());
+            enviarMensaje("Operation Succesful");
+        } catch (IOException ex) {
+            Logger.getLogger(Actividad4.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Error"+ex);
+        }
+    }//GEN-LAST:event_jButton7ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -307,23 +385,17 @@ public class Actividad4 extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     // End of variables declaration//GEN-END:variables

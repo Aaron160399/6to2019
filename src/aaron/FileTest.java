@@ -32,7 +32,7 @@ public class FileTest extends javax.swing.JFrame {
     void sendMessage(String message){
         JOptionPane.showMessageDialog(null, message);
     }
-    
+
     String openFileChooser(){
         JFileChooser jFileChooser = new JFileChooser();
         jFileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
@@ -43,7 +43,7 @@ public class FileTest extends javax.swing.JFrame {
             return null;
         }
     }
-    
+
     void verify(String url){
         /*Creo un objeto del tió File, como ruta agrego mi variable local
         url para hacer referencia a dicha dirección*/
@@ -63,7 +63,7 @@ public class FileTest extends javax.swing.JFrame {
             }
         }
     }
-    
+
     void copy(String sourceURL, String pathURL) throws FileNotFoundException, IOException{
         //Creo un objeto de mi archivo que quiero copiar
         File source = new File(sourceURL);
@@ -72,7 +72,7 @@ public class FileTest extends javax.swing.JFrame {
         /*Para que mi operación funcione, debo concatenar en mi ruta de salida
         el nombre y extensión de mi archivo*/
         String output = pathURL +"\\"+ source.getName();
-        /*De igual manera, creo un nuevo canal de archivos, 
+        /*De igual manera, creo un nuevo canal de archivos,
         que será el de mi carpeta destino*/
         FileChannel fileOutputStream = new FileOutputStream(output).getChannel();
         //Creo la operación de transferencia
@@ -90,7 +90,7 @@ public class FileTest extends javax.swing.JFrame {
             source.delete();
         }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -303,32 +303,14 @@ public class FileTest extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        /*Mando a llamar mi método y establezco la ruta elegida desde el 
-        JTextField*/
-        verify(jTextField2.getText());
-    }//GEN-LAST:event_jButton7ActionPerformed
+    }
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        jTextField3.setText(openFileChooser());
-    }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
-        jTextField4.setText(openFileChooser());
-    }//GEN-LAST:event_jButton6ActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        try {
-            // TODO add your handling code here:
-            copy(jTextField3.getText(), jTextField4.getText());
-            sendMessage("Operation succesful");
-        } catch (IOException ex) {
-            System.out.println("Error: "+ex);
-        }
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }
 
     /**
      * @param args the command line arguments
@@ -337,7 +319,7 @@ public class FileTest extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

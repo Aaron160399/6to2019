@@ -6,6 +6,13 @@
 package aaron;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.channels.FileChannel;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -25,7 +32,7 @@ public class FileTest extends javax.swing.JFrame {
     void sendMessage(String message){
         JOptionPane.showMessageDialog(null, message);
     }
-    
+
     String openFileChooser(){
         JFileChooser jFileChooser = new JFileChooser();
         jFileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
@@ -36,7 +43,54 @@ public class FileTest extends javax.swing.JFrame {
             return null;
         }
     }
-    
+
+    void verify(String url){
+        /*Creo un objeto del tió File, como ruta agrego mi variable local
+        url para hacer referencia a dicha dirección*/
+        File file = new File(url);
+        /*Pregunto: ¿Ese directorio (carpeta) ya existe?*/
+        if (file.exists()) {
+            //Si es así, lo indico
+            sendMessage("The directory already exists");
+        } else {
+            /*En caso contrario, creo la(s) ruta(s) especificada(s)
+            Y pregunto si el proceso fue correcto*/
+            if(file.mkdirs()){
+                //En caso de serlo, lo indico
+                sendMessage("The directory was created successfully");
+            } else {
+                //En caso contrario, tambiénlo indico
+            }
+        }
+    }
+
+    void copy(String sourceURL, String pathURL) throws FileNotFoundException, IOException{
+        //Creo un objeto de mi archivo que quiero copiar
+        File source = new File(sourceURL);
+        //Creo un canal de archivos, que será el de mi archivo objetivo
+        FileChannel fileInputStream = new FileInputStream(source).getChannel();
+        /*Para que mi operación funcione, debo concatenar en mi ruta de salida
+        el nombre y extensión de mi archivo*/
+        String output = pathURL +"\\"+ source.getName();
+        /*De igual manera, creo un nuevo canal de archivos,
+        que será el de mi carpeta destino*/
+        FileChannel fileOutputStream = new FileOutputStream(output).getChannel();
+        //Creo la operación de transferencia
+        fileOutputStream.transferFrom(fileInputStream, 0, fileInputStream.size());
+        //Cerramos los canales de comunicación
+        if (fileInputStream != null) {
+            fileInputStream.close();
+        }
+        if (fileOutputStream != null) {
+            fileOutputStream.close();
+        }
+        //Pregunto si el RadioButton de cortar está seleccionado
+        if (jRadioButton4.isSelected()) {
+            //En caso de serlo, elimino el archivo después de haberlo copiado
+            source.delete();
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -124,6 +178,11 @@ public class FileTest extends javax.swing.JFrame {
         });
 
         jButton6.setText("To");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(jRadioButton3);
         jRadioButton3.setText("Copy");
@@ -176,6 +235,11 @@ public class FileTest extends javax.swing.JFrame {
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Directories"));
 
         jButton7.setText("Create");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -192,9 +256,9 @@ public class FileTest extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton7)
-                .addGap(36, 36, 36))
+                .addGap(41, 41, 41))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -213,12 +277,12 @@ public class FileTest extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -239,13 +303,14 @@ public class FileTest extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
+
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }
 
     /**
      * @param args the command line arguments
@@ -254,7 +319,7 @@ public class FileTest extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

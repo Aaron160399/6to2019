@@ -303,13 +303,25 @@ public class FileTest extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        try {
+            // TODO add your handling code here:
+            copy(jTextField3.getText(), jTextField4.getText());
+        } catch (IOException ex) {
+            sendMessage("Error: "+ex);
+        }
     }
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
+        jTextField3.setText(openFileChooser());
+    }
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        // TODO add your handling code here:
+        jTextField4.setText(openFileChooser());
+    }
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        // TODO add your handling code here:
+        verify(jTextField2.getText());
     }
 
     /**

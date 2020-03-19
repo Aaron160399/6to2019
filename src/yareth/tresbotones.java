@@ -5,14 +5,27 @@
  */
 package yareth;
 
+
+import abimelek.panel1;
 import aaron.*;
+
 import javax.swing.JPanel;
 
 /**
  *
  * @author Aaron
  */
+
+public class tresbotones extends javax.swing.JFrame {
+panel1 pan1 = new panel1();
+panel1 pan2 = new panel1();
+panel1 pan3 = new panel1();
+    /**
+     * Creates new form tresbotones
+     */
+
 public class trsbotones extends javax.swing.JFrame {
+
     
     Panel1 panel1 = new Panel1();
     Panel2 panel2 = new Panel2();
@@ -123,6 +136,7 @@ public class trsbotones extends javax.swing.JFrame {
         cargar(panel3);
     }//GEN-LAST:event_jButton3ActionPerformed
 
+}
     /**
      * @param args the command line arguments
      */
@@ -156,7 +170,7 @@ public class trsbotones extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new trsbotones().setVisible(true);
+                new tresbotones().setVisible(true);
             }
         });
     }
@@ -168,3 +182,4 @@ public class trsbotones extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
+

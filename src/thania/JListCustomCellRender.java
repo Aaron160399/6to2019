@@ -26,6 +26,10 @@ public class JListCustomCellRender extends JLabel implements ListCellRenderer<Ob
         String s=value.toString();
         setText(s);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2ad768992c4840475f754f5a1971b0f470fba8ae
        setIcon(new ImageIcon(getClass().getResource("/img/file.png")));
        if(isSelected){
            setBackground(Color.cyan);
@@ -34,7 +38,11 @@ public class JListCustomCellRender extends JLabel implements ListCellRenderer<Ob
            setBackground(Color.magenta);
            setForeground(Color.red);
        }
+<<<<<<< HEAD
 =======
+=======
+
+>>>>>>> 2ad768992c4840475f754f5a1971b0f470fba8ae
         setIcon(new ImageIcon(getClass().getResource("/img/file.png")));
         if (isSelected) {
             setBackground(Color.cyan);
@@ -43,7 +51,11 @@ public class JListCustomCellRender extends JLabel implements ListCellRenderer<Ob
             setBackground(Color.magenta);
             setForeground(Color.red);
         }
+<<<<<<< HEAD
 >>>>>>> 96a9cd1131186af47aff67642ee3fd38bd1e1e20
+=======
+
+>>>>>>> 2ad768992c4840475f754f5a1971b0f470fba8ae
         setEnabled(list.isEnabled());
         setFont(list.getFont());
         setOpaque(true);

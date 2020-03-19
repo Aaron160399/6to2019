@@ -30,11 +30,8 @@ public class Jframe extends javax.swing.JFrame {
         jList1.setLayoutOrientation(VERTICAL_WRAP);
         jList1.setVisibleRowCount(-1);
        jList1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-<<<<<<< HEAD
        jList1.setCellRenderer(new JListCustomCellRenderer());
-=======
        jList1.setCellRenderer(new JListCustomCellRender());
->>>>>>> 18fcd704d1bfee31c4d9bc53c31862c9ca614a2e
 
     }
     

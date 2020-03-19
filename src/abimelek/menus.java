@@ -24,6 +24,8 @@ public class menus extends javax.swing.JFrame {
    
     public menus() {
         initComponents();
+        this.setSize(java.awt.Toolkit.getDefaultToolkit().getScreenSize());
+        
     }
  void cargarPanel (JPanel panel){
         jPanel1.removeAll();

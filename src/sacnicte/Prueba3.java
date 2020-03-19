@@ -8,6 +8,7 @@ package sacnicte;
 import java.awt.Button;
 import javax.swing.DefaultListModel;
 import static javax.swing.JList.VERTICAL_WRAP;
+import javax.swing.ListSelectionModel;
 
 /**
  *
@@ -28,7 +29,7 @@ public class Prueba3 extends javax.swing.JFrame {
         jList1.setModel(defaultListModel);
         jList1.setLayoutOrientation(VERTICAL_WRAP);
         jList1.setVisibleRowCount(-1);
-        jList1.setSelectionMode(ListSelectionMode.SINGLE_SELECTION);
+        jList1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         jList1.setCellRenderer(new JListCustomCellRenderer());
     }
 

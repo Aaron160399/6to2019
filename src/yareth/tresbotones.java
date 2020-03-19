@@ -5,6 +5,7 @@
  */
 package yareth;
 
+import abimelek.panel1;
 import javax.swing.JPanel;
 
 /**
@@ -12,9 +13,9 @@ import javax.swing.JPanel;
  * @author hp
  */
 public class tresbotones extends javax.swing.JFrame {
-Pan1 pan1 = new Pan1();
-    Pan2 pan2 = new Pan2();
-    Pan3 pan3 = new Pan3();
+panel1 pan1 = new panel1();
+panel1 pan2 = new panel1();
+panel1 pan3 = new panel1();
     /**
      * Creates new form tresbotones
      */

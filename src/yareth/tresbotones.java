@@ -16,7 +16,7 @@ import javax.swing.JPanel;
  *
  * @author Aaron
  */
-<<<<<<< HEAD:src/yareth/tresbotones.java
+
 public class tresbotones extends javax.swing.JFrame {
 panel1 pan1 = new panel1();
 panel1 pan2 = new panel1();
@@ -24,9 +24,9 @@ panel1 pan3 = new panel1();
     /**
      * Creates new form tresbotones
      */
-=======
+
 public class trsbotones extends javax.swing.JFrame {
->>>>>>> 86a37e03331d3b5bae870d0174cc875dc8ceaebf:src/yareth/trsbotones.java
+
     
     Panel1 panel1 = new Panel1();
     Panel2 panel2 = new Panel2();
@@ -137,6 +137,7 @@ public class trsbotones extends javax.swing.JFrame {
         cargar(panel3);
     }//GEN-LAST:event_jButton3ActionPerformed
 
+}
     /**
      * @param args the command line arguments
      */
@@ -182,3 +183,4 @@ public class trsbotones extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
+

@@ -31,12 +31,12 @@ public class Actividad03 extends javax.swing.JFrame {
         jList1.setLayoutOrientation(VERTICAL_WRAP);
         jList1.setVisibleRowCount(-1);
         jList1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-<<<<<<< HEAD
+
         jList1.setCellRenderer(new JListCustomCellRenderer());
         
-=======
+
        jList1.setCellRenderer(new JListCustomerCellRenderer());        
->>>>>>> 86a37e03331d3b5bae870d0174cc875dc8ceaebf
+
     }
 void cargarInfo(){
     DefaultListModel model = ( DefaultListModel)jList1.getModel();
@@ -137,13 +137,13 @@ void cargarInfo(){
     }// </editor-fold>//GEN-END:initComponents
 
     private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
-<<<<<<< HEAD
+
         // TODO add your handling code here:
         
-=======
+
      
         cargarInfo();
->>>>>>> 86a37e03331d3b5bae870d0174cc875dc8ceaebf
+
     }//GEN-LAST:event_jList1ValueChanged
 
     /**

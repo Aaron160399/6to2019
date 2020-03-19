@@ -30,11 +30,11 @@ public class Prueba3 extends javax.swing.JFrame {
         jList1.setLayoutOrientation(VERTICAL_WRAP);
         jList1.setVisibleRowCount(-1);
         jList1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-<<<<<<< HEAD
+
         jList1.setCellRenderer(new JListCustomCellRenderer());
-=======
+
         jList1.setCellRenderer(new miriam.JListCustomCellRenderer());
->>>>>>> 86a37e03331d3b5bae870d0174cc875dc8ceaebf
+
     }
 
     /**

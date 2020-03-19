@@ -3,53 +3,39 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package thania;
+package erika;
 
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.List;
+import java.net.URL;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
 
-/**
- *
- * @author lizbe
- */
-public class JListCustomCellRender extends JLabel implements ListCellRenderer<Object>{
+public class JListCustomCellRenderer extends JLabel implements ListCellRenderer<Object> {
 
-     
-  
     @Override
     public Component getListCellRendererComponent(JList<? extends Object> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-        String s=value.toString();
+        String s = value.toString();
         setText(s);
-<<<<<<< HEAD
-       setIcon(new ImageIcon(getClass().getResource("/img/file.png")));
-       if(isSelected){
-           setBackground(Color.cyan);
-           setForeground(Color.blue);
-       }else{
-           setBackground(Color.magenta);
-           setForeground(Color.red);
-       }
-=======
-        setIcon(new ImageIcon(getClass().getResource("/img/file.png")));
-        if (isSelected) {
+        setIcon(new ImageIcon(getClass().getResource("/img/closefolder.png")));
+        if(isSelected){
             setBackground(Color.cyan);
             setForeground(Color.blue);
         }else{
             setBackground(Color.magenta);
             setForeground(Color.red);
         }
->>>>>>> 96a9cd1131186af47aff67642ee3fd38bd1e1e20
         setEnabled(list.isEnabled());
         setFont(list.getFont());
         setOpaque(true);
         return(this);
-        
     }
-            
+
+    
+
+    
     
 }

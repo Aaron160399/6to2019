@@ -9,6 +9,11 @@ import axel.JListCustomerCellRenderer;
 import javax.swing.DefaultListModel;
 import static javax.swing.JList.VERTICAL_WRAP;
 import javax.swing.ListSelectionModel;
+<<<<<<< HEAD
+import miriam.JListCustomCellRenderer;
+=======
+import sacnicte.JListCustomCellRenderer;
+>>>>>>> 2ad768992c4840475f754f5a1971b0f470fba8ae
 
 /**
  *
@@ -30,7 +35,21 @@ public class Actividad03 extends javax.swing.JFrame {
         jList1.setLayoutOrientation(VERTICAL_WRAP);
         jList1.setVisibleRowCount(-1);
         jList1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+<<<<<<< HEAD
+<<<<<<< HEAD
+        jList1.setCellRenderer(new JListCustomCellRenderer());
+        
+=======
        jList1.setCellRenderer(new JListCustomerCellRenderer());        
+>>>>>>> 96a9cd1131186af47aff67642ee3fd38bd1e1e20
+=======
+
+        jList1.setCellRenderer(new JListCustomCellRenderer());
+        
+
+       jList1.setCellRenderer(new JListCustomerCellRenderer());        
+
+>>>>>>> 2ad768992c4840475f754f5a1971b0f470fba8ae
     }
 void cargarInfo(){
     DefaultListModel model = ( DefaultListModel)jList1.getModel();
@@ -131,8 +150,13 @@ void cargarInfo(){
     }// </editor-fold>//GEN-END:initComponents
 
     private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
+
+        // TODO add your handling code here:
+        
+
      
         cargarInfo();
+
     }//GEN-LAST:event_jList1ValueChanged
 
     /**

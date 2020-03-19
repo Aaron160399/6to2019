@@ -55,6 +55,11 @@ public class menudos extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        jList1.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jList1ValueChanged(evt);
+            }
+        });
         jScrollPane1.setViewportView(jList1);
 
         jLabel1.setText("Nombre");
@@ -110,6 +115,19 @@ public class menudos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
+        // TODO add your handling code here:
+        cargarinfo();
+        
+        
+    }//GEN-LAST:event_jList1ValueChanged
+
+    void cargarinfo(){
+        DefaultListModel model = (DefaultListModel)jList1.getModel();
+        Persona persona = (Persona)model.getElementAt(jList1.getSelectedIndex());
+        jTextField1.setText(persona.getNombre());
+        jTextField2.setText(persona.getEdad()+" ");
+    }
     /**
      * @param args the command line arguments
      */

@@ -6,6 +6,12 @@
 package martin;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.channels.FileChannel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -21,20 +27,33 @@ public class claseFile extends javax.swing.JFrame {
     public claseFile() {
         initComponents();
     }
-    
+
     void enviarMensaje(String mensaje) {
         JOptionPane.showMessageDialog(null, mensaje);
     }
-    
+
     String abrirFileChooser() {
         JFileChooser fc = new JFileChooser();
         fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
         int returnval = fc.showOpenDialog(null);
         if (returnval == JFileChooser.APPROVE_OPTION) {
             return fc.getSelectedFile().getAbsolutePath();
-            
+
         } else {
             return null;
+        }
+    }
+
+    void verify(String url) {
+        File file = new File(url);
+        if (file.exists()) {
+            enviarMensaje("The directory already exist");
+        } else {
+            if (file.mkdirs()) {
+                enviarMensaje("chido");
+            } else {
+
+            }
         }
     }
 
@@ -110,6 +129,11 @@ public class claseFile extends javax.swing.JFrame {
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Verificacion"));
 
         jButton3.setText("crear");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -141,14 +165,29 @@ public class claseFile extends javax.swing.JFrame {
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Verificacion"));
 
         jButton4.setText("de");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("a ");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jRadioButton1.setText("copiar");
 
         jRadioButton2.setText("pegar");
 
         jButton6.setText("contyinuar");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -219,7 +258,7 @@ public class claseFile extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         jTextField1.setText(abrirFileChooser());
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -230,6 +269,46 @@ public class claseFile extends javax.swing.JFrame {
             enviarMensaje("es un archivo");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        verify(jTextField2.getText());
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        jTextField3.setText(abrirFileChooser());
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        jTextField4.setText(abrirFileChooser());
+
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        try {
+            copy(jTextField3.getText(), jTextField4.getText());
+            enviarMensaje("dale papa, bien ");
+        } catch (IOException ex) {
+            System.out.println("error: " + ex);
+        }
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    void copy(String sourceURL, String pathURL) throws FileNotFoundException, IOException {
+        File file = new File(sourceURL);
+        FileChannel fileInputStream = new FileInputStream(file).getChannel();
+        String output = pathURL + "\\" + file.getName();
+        FileChannel outputStream = new FileOutputStream(output).getChannel();
+        outputStream.transferFrom(fileInputStream, 0, fileInputStream.size());
+        if (fileInputStream != null) {
+            fileInputStream.close();
+        }
+        if (outputStream != null) {
+            outputStream.close();
+        }
+        if (jRadioButton2.isSelected()) {
+            file.delete();
+        }
+
+    }
 
     /**
      * @param args the command line arguments
@@ -274,7 +353,6 @@ public class claseFile extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JRadioButton jRadioButton1;

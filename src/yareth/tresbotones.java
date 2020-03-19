@@ -5,11 +5,10 @@
  */
 package yareth;
 
-<<<<<<< HEAD:src/yareth/tresbotones.java
+
 import abimelek.panel1;
-=======
 import aaron.*;
->>>>>>> 86a37e03331d3b5bae870d0174cc875dc8ceaebf:src/yareth/trsbotones.java
+
 import javax.swing.JPanel;
 
 /**
@@ -171,7 +170,7 @@ public class trsbotones extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new trsbotones().setVisible(true);
+                new tresbotones().setVisible(true);
             }
         });
     }

@@ -6,6 +6,11 @@
 package miriam;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.channels.FileChannel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -24,6 +29,18 @@ public class actiFILE extends javax.swing.JFrame {
     void enviarMensaje(String mensaje){
         JOptionPane.showMessageDialog(null, mensaje);
         
+    }
+    void verify(String url){
+        File file = new File(url);
+        if (file.exists()) {
+            enviarMensaje("El directorio ya existe");
+        }else{
+            if (file.mkdirs()) {
+                enviarMensaje("El directorio fue creado exitosamente");
+            }else{
+                
+            }
+        }
     }
     String abrirFileChooser(){
         JFileChooser fc = new JFileChooser();
@@ -110,6 +127,11 @@ public class actiFILE extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Direcciones"));
 
         jButton3.setText("Crear");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -138,14 +160,29 @@ public class actiFILE extends javax.swing.JFrame {
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Operaciones"));
 
         jButton4.setText("De");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("A");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jRadioButton1.setText("Copiar");
 
         jRadioButton2.setText("Pegar");
 
         jButton6.setText("Continuar");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -231,6 +268,47 @@ public class actiFILE extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        verify(jTextField2.getText());
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        jTextField3.setText(abrirFileChooser());
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        jTextField4.setText(abrirFileChooser());
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        try{
+            copy(jTextField3.getText(), jTextField4.getText());
+            enviarMensaje("success");
+        }catch(IOException ex){
+            System.out.println("Error: "+ex);
+        }
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    void copy(String sourceURL, String pathURL) throws FileNotFoundException, IOException{
+        File source = new File(sourceURL);
+        FileChannel fileInputStream = new FileInputStream(source).getChannel();
+        String output=pathURL+"\\"+source.getName();
+        FileChannel fileOutputStream = new FileOutputStream(output).getChannel();
+        fileOutputStream.transferFrom(fileInputStream,0, fileInputStream.size());
+        if (fileInputStream!=null) {
+            fileInputStream.close();
+        }
+        if (fileOutputStream!=null) {
+             fileOutputStream.close();
+        }
+        if (jRadioButton2.isSelected()) {
+            source.delete();
+        }
+    }
     /**
      * @param args the command line arguments
      */

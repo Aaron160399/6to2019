@@ -3,41 +3,52 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package thania;
+package david;
 
 /**
  *
- * @author lizbe
+ * @author Geek
  */
 public class Persona {
     
     private String nombre;
-    private double edad;
+    private int edad;
 
-    public Persona(String nombre, double edad) {
+    public Persona(String nombre, int edad) {
         this.nombre = nombre;
         this.edad = edad;
     }
 
-    public double getEdad() {
-        return edad;
-    }
-
-    public void setEdad(double edad) {
-        this.edad = edad;
-    }
-
+    
+    
+    /**
+     * @return the nombre
+     */
     public String getNombre() {
         return nombre;
     }
 
+    /**
+     * @param nombre the nombre to set
+     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    
-    @Override
-    public String toString(){
-     return getNombre();
-        
+
+    /**
+     * @return the edad
+     */
+    public int getEdad() {
+        return edad;
     }
+
+    /**
+     * @param edad the edad to set
+     */
+    public void setEdad(int edad) {
+        this.edad = edad;
+    }
+    
+    
+    
 }

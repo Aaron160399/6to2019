@@ -29,6 +29,7 @@ public class act3 extends javax.swing.JFrame {
         jList1.setVisibleRowCount(-1);
         jList1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         jList1.setCellRenderer(new JListCustomCellRenderer());
+       
     }
 
     /**
@@ -49,6 +50,11 @@ public class act3 extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jList1.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jList1ValueChanged(evt);
+            }
+        });
         jScrollPane1.setViewportView(jList1);
 
         jLabel1.setText("nombre:");
@@ -91,6 +97,17 @@ public class act3 extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
+        // TODO add your handling code here:
+        cargarInfo();
+    }//GEN-LAST:event_jList1ValueChanged
+
+    void cargarInfo(){
+        DefaultListModel model = (DefaultListModel)jList1.getModel();
+        Persona persona = (Persona)model.getElementAt(jList1.getSelectedIndex());
+        jTextField1.setText(persona.getNombre());
+        jTextField2.setText(persona.getEdad()+"");
+    }
     /**
      * @param args the command line arguments
      */

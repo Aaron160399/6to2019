@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package yareth;
+package carlos;
 
 /**
  *
- * @author hp
+ * @author Charly P
  */
-class Pan3 {
+public class JListCellRendere {
     
 }

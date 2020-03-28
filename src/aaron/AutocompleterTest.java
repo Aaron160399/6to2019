@@ -5,6 +5,9 @@
  */
 package aaron;
 
+import com.mxrck.autocompleter.AutoCompleterCallback;
+import com.mxrck.autocompleter.TextAutoCompleter;
+
 /**
  *
  * @author Aaron
@@ -14,8 +17,44 @@ public class AutocompleterTest extends javax.swing.JFrame {
     /**
      * Creates new form AutocompleterTest
      */
+    
+    /*Creo un objeto del tipo TextAutoCompleter. Hay que importar de
+    com.mxrck.autocompleter.TextAutoCompleter*/
+    TextAutoCompleter textAutoCompleter;
+    
     public AutocompleterTest() {
         initComponents();
+        
+        /*Inicializo mi AutoCompleter. Para ello, el primer campo me pide con
+        qué elemento va a reaccionar, en este caso yo quiero que cada vez que
+        se escriba algo en el jTextField1 me desgloce todas las posibilidades
+        que hay o que me "prediga" el texto tal como lo hace Google. El segundo
+        campo es para realizar una acción cuando yo seleccione una de las
+        opciones ofrecidas por la lista*/
+        textAutoCompleter = new TextAutoCompleter(jTextField1, new AutoCompleterCallback() {
+            @Override
+            public void callback(Object o) {
+                /*Cuando el usuario seleccione algo de la lista del "predictor
+                de textos" cargaré la información en el jTextField2, que es la
+                edad. Primero, obtengo el valor seleccionado y lo casteo a una
+                Persona*/
+                Person person = (Person)textAutoCompleter.findItem(o);
+                /*Ahora, sólo desglosaré los valores necsarios*/
+                jTextField2.setText(person.getAge()+"");
+            }
+        });
+        //Mando a llamar el método que carga los datos del AutoCompleter
+        loadAutoCompleter();
+    }
+    
+    void loadAutoCompleter(){
+        //Hago un for para que me cree 10 personas
+        for (int i = 0; i < 10; i++) {
+            //Creo una persona dependiendo a la posición del for
+            Person person = new Person("Name"+i, i);
+            //Agrego la persona a mi lista del predictor de textos
+            textAutoCompleter.addItem(person);
+        }
     }
 
     /**

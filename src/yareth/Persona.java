@@ -9,16 +9,32 @@ package yareth;
  *
  * @author hp
  */
-public class personas {
-      private String nombre;
+public class Persona {
+
+     private int id; 
+    private String nombre;
     private int edad;
 
-    public personas() {
+    public Persona() {
     }
 
-    public personas(String nombre, int edad) {
+    public Persona(int id, String nombre, int edad) {
+        this.id = id;
         this.nombre = nombre;
         this.edad = edad;
+    }
+    
+    public Persona(String nombre, int edad) {
+        this.nombre = nombre;
+        this.edad = edad;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNombre() {
@@ -36,7 +52,12 @@ public class personas {
     public void setEdad(int edad) {
         this.edad = edad;
     }
+
+    @Override
+    public String toString() {
+        return getNombre();
+    }
+    
+    
     
 }
-
-

@@ -12,17 +12,19 @@ package martin;
 public class p {
 
     private String nombre;
-    private String edad;
+    private int edad;
 
     public p() {
     }
 
-    public p(String nombre, String edad) {
+    public p(String nombre, int edad) {
         this.nombre = nombre;
         this.edad = edad;
     }
 
-    public void setEdad(String edad) {
+
+
+    public void setEdad(int edad) {
         this.edad = edad;
     }
 
@@ -30,7 +32,7 @@ public class p {
         this.nombre = nombre;
     }
 
-    public String getEdad() {
+    public int getEdad() {
         return edad;
     }
 

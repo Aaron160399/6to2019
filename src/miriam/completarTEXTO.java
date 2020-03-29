@@ -3,56 +3,35 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package aaron;
+package miriam;
 
 import com.mxrck.autocompleter.AutoCompleterCallback;
 import com.mxrck.autocompleter.TextAutoCompleter;
 
 /**
  *
- * @author Aaron
+ * @author 52229
  */
-public class AutocompleterTest extends javax.swing.JFrame {
-
+public class completarTEXTO extends javax.swing.JFrame {
+TextAutoCompleter textAutoCompleter;
     /**
-     * Creates new form AutocompleterTest
+     * Creates new form completarTEXTO
      */
-    
-    /*Creo un objeto del tipo TextAutoCompleter. Hay que importar de
-    com.mxrck.autocompleter.TextAutoCompleter*/
-    TextAutoCompleter textAutoCompleter;
-    
-    public AutocompleterTest() {
+    public completarTEXTO() {
         initComponents();
-        
-        /*Inicializo mi AutoCompleter. Para ello, el primer campo me pide con
-        qué elemento va a reaccionar, en este caso yo quiero que cada vez que
-        se escriba algo en el jTextField1 me desgloce todas las posibilidades
-        que hay o que me "prediga" el texto tal como lo hace Google. El segundo
-        campo es para realizar una acción cuando yo seleccione una de las
-        opciones ofrecidas por la lista*/
-        textAutoCompleter = new TextAutoCompleter(jTextField1, new AutoCompleterCallback() {
+        textAutoCompleter=new TextAutoCompleter(jTextField1,new AutoCompleterCallback() {
             @Override
             public void callback(Object o) {
-                /*Cuando el usuario seleccione algo de la lista del "predictor
-                de textos" cargaré la información en el jTextField2, que es la
-                edad. Primero, obtengo el valor seleccionado y lo casteo a una
-                Persona*/
-                Person person = (Person)textAutoCompleter.findItem(o);
-                /*Ahora, sólo desglosaré los valores necsarios*/
-                jTextField2.setText(person.getAge()+"");
-            }
+                Persona person =(Persona)textAutoCompleter.findItem(o);
+                jTextField2.setText(person.getEdad()+"");
+            
+            } 
         });
-        //Mando a llamar el método que carga los datos del AutoCompleter
         loadAutoCompleter();
     }
-    
     void loadAutoCompleter(){
-        //Hago un for para que me cree 10 personas
         for (int i = 0; i < 10; i++) {
-            //Creo una persona dependiendo a la posición del for
-            Person person = new Person("Name"+i, i);
-            //Agrego la persona a mi lista del predictor de textos
+            Persona person = new Persona("Name"+i, i);
             textAutoCompleter.addItem(person);
         }
     }
@@ -67,43 +46,43 @@ public class AutocompleterTest extends javax.swing.JFrame {
     private void initComponents() {
 
         jTextField1 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Name");
+        jLabel1.setText("Nombre:");
 
-        jLabel2.setText("Age");
+        jLabel2.setText("Edad:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(68, 68, 68)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(101, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField1)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
-                .addContainerGap(87, Short.MAX_VALUE))
+                .addGap(41, 41, 41)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(45, 45, 45))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addGap(63, 63, 63)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addGap(28, 28, 28)
+                .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(208, Short.MAX_VALUE))
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addContainerGap(154, Short.MAX_VALUE))
         );
 
         pack();
@@ -126,20 +105,20 @@ public class AutocompleterTest extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AutocompleterTest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(completarTEXTO.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AutocompleterTest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(completarTEXTO.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AutocompleterTest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(completarTEXTO.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AutocompleterTest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(completarTEXTO.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AutocompleterTest().setVisible(true);
+                new completarTEXTO().setVisible(true);
             }
         });
     }

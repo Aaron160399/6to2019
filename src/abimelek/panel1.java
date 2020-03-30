@@ -43,9 +43,9 @@ public class panel1 extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(128, 128, 128)
+                .addGap(113, 113, 113)
                 .addComponent(jButton1)
-                .addContainerGap(147, Short.MAX_VALUE))
+                .addContainerGap(162, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

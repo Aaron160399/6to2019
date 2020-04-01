@@ -43,6 +43,7 @@ public class Camara extends javax.swing.JFrame implements Runnable,
     
     public Camara() {
         initComponents();
+        run();
     }
 
    void startCamera(){
@@ -76,12 +77,11 @@ public class Camara extends javax.swing.JFrame implements Runnable,
     }
    
     void takePicture(){
-        WebcamUtils.capture(webcam, "C:\\Users\\erika\\Downloads\\img.png",
-                ImageUtils.FORMAT_PNG);
+        WebcamUtils.capture(webcam, "C:\\Users\\erika\\Desktop\\img.png",ImageUtils.FORMAT_PNG);
         webcamPanel.stop();
         jPanel1.removeAll();
         ImageIcon imageIcon = new ImageIcon (
-            "C:\\Users\\erika\\Downloads\\img.png");
+            "C:\\Users\\erika\\Desktop\\img.png");
         Icon icon = new ImageIcon (
             imageIcon.getImage().getScaledInstance(jPanel1.getWidth(),
                     jPanel1.getHeight(), Image.SCALE_DEFAULT));

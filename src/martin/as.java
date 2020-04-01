@@ -23,7 +23,7 @@ public class as extends javax.swing.JFrame {
         initComponents();
         DefaultListModel defaultListModel = new DefaultListModel();
         for (int i = 0; i < 10; i++) {
-            defaultListModel.addElement(new p("nombre" + i, "" + i));
+            defaultListModel.addElement(new p("nombre" + i,  + i));
         }
         jList1.setModel(defaultListModel);
         jList1.setLayoutOrientation(VERTICAL_WRAP);
@@ -119,7 +119,7 @@ public class as extends javax.swing.JFrame {
         DefaultListModel model = (DefaultListModel) jList1.getModel();
         p p = (p) model.getElementAt(jList1.getSelectedIndex());
         jTextField1.setText(p.getNombre());
-        jTextField2.setText(p.getEdad());
+        jTextField2.setText(p.getEdad()+"");
     }
 
     /**

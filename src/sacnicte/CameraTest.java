@@ -78,10 +78,10 @@ public class CameraTest extends javax.swing.JFrame implements Runnable, WebcamLi
     }
     
     void takePicture(){
-        WebcamUtils.capture(webcam, "C:\\Users\\blanc\\Pictures",ImageUtils.FORMAT_PNG);
+        WebcamUtils.capture(webcam, "C:\\Users\\blanc\\Pictures\\img",ImageUtils.FORMAT_PNG);
         webcamPanel.stop();
         jPanel1.removeAll();
-        ImageIcon imageIcon = new ImageIcon("C:\\Users\\blanc\\Pictures");
+        ImageIcon imageIcon = new ImageIcon("C:\\Users\\blanc\\Pictures\\img.png");
         Icon icon = new ImageIcon(
         imageIcon.getImage().getScaledInstance(jPanel1.getWidth(),
                 jPanel1.getHeight(), Image.SCALE_DEFAULT));

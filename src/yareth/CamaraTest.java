@@ -3,8 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-package david;
+package yareth;
 
 import com.github.sarxos.webcam.Webcam;
 import com.github.sarxos.webcam.WebcamDiscoveryEvent;
@@ -31,68 +30,62 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author Geek
+ * @author hp
  */
-public class Clase5Camara extends javax.swing.JFrame implements Runnable, 
+public class CamaraTest extends javax.swing.JFrame implements Runnable, 
         WebcamListener, WindowListener, Thread.UncaughtExceptionHandler, 
         ItemListener, WebcamDiscoveryListener {
     
-    
     private static final long serialVersionUID = 1L;
-    //Para crear un objeto webcam
     private Webcam webcam = null;
-    //
     private WebcamPanel webcamPanel = null;
     
     private WebcamPicker picker = null;
     
     
 
-    /** Creates new form Clase5Camara */
-    public Clase5Camara() {
+    /**
+     * Creates new form CamaraTest
+     */
+    public CamaraTest() {
         initComponents();
-        run();
+         run();
     }
-
-    void startCamera(){
-        webcam = picker.getSelectedWebcam();
+  void startCamera(){
+       webcam = picker.getSelectedWebcam();
         if (webcam == null) {
                 System.out.println("No se encontro una camaraweb:'c");
                 System.exit(1);
         }
-        webcam.setViewSize(WebcamResolution.VGA.getSize());
+          webcam.setViewSize(WebcamResolution.VGA.getSize());
         webcam.addWebcamListener(this);
         System.out.println("selected " + webcam.getName());
         webcamPanel = new WebcamPanel(webcam, new Dimension(500, 500) ,false);
         webcamPanel.setFPSDisplayed(true);
-        jPanel1.removeAll();
-        jPanel1.setLayout(new FlowLayout());
-        jPanel1.add(webcamPanel, BorderLayout.CENTER);
-       
-        pack();
-        setVisible(true);
-        
-        Thread t = new Thread() {
-
+         jPanel1.removeAll();
+          jPanel1.setLayout(new FlowLayout());
+           jPanel1.add(webcamPanel, BorderLayout.CENTER);
+           pack();
+           setVisible(true);
+           
+           Thread t = new Thread(){
                 @Override
                 public void run() {
-                    //Iniciamos la cámara
-                    webcamPanel.start();
-                }
-        };
-       
-        t.setName("example-starter");
-        t.setDaemon(true);
-        t.setUncaughtExceptionHandler(this);
-        t.start();
-    }
-    
-    
-    public void run() {
+                   webcamPanel.start();
+                   
+                   }
+           };
+           t.setName("exammple-starterrr");
+           t.setDaemon(true);
+           t.setUncaughtExceptionHandler(this);
+           t.start();
+  }
+  public void run() {
+
         setLayout(new BorderLayout());
         addWindowListener(this);
         picker = new WebcamPicker();
-         picker.addItemListener(this);
+        picker.addItemListener(this);
         add(picker, BorderLayout.NORTH);
         add(jPanel1, BorderLayout.CENTER);
         add(jButton1, BorderLayout.EAST);
@@ -100,40 +93,43 @@ public class Clase5Camara extends javax.swing.JFrame implements Runnable,
         add(jButton3, BorderLayout.SOUTH);
         startCamera();
     }
-    
-    void takePicture(){
-        
-        WebcamUtils.capture(webcam, "C:\\Users\\Geek\\Desktop\\img", 
-                ImageUtils.FORMAT_PNG);
+void takePicture(){
+        WebcamUtils.capture(webcam, "C:\\Users\\hp\\Desktop\\img",ImageUtils.FORMAT_PNG);
         webcamPanel.stop();
         jPanel1.removeAll();
-        ImageIcon imageIcon = new ImageIcon(
-            "C:\\Users\\Geek\\Desktop\\img.png");
+        ImageIcon imageIcon = new ImageIcon("C:\\Users\\hp\\Desktop\\img.png");
         Icon icon = new ImageIcon(
-            imageIcon.getImage().getScaledInstance(jPanel1.getWidth(),
+        imageIcon.getImage().getScaledInstance(jPanel1.getWidth(),
                 jPanel1.getHeight(), Image.SCALE_DEFAULT));
         JLabel jLabel = new JLabel();
-        jLabel.setSize(500, 500);
+        jLabel.setSize(500,500);
         jLabel.setIcon(icon);
+        
         jPanel1.add(jLabel);
         jPanel1.revalidate();
         jPanel1.repaint();
     }
-    
-     public void restartCamera(JPanel jPanel, WebcamPanel webcamPanel){
-         if (webcam.isOpen()) {
+
+
+  public void restartCamera(JPanel jPanel, WebcamPanel webcamPanel){
+        if (webcam.isOpen()) {
             webcamPanel.setFillArea(false);
             webcamPanel.setFPSDisplayed(true);
             webcamPanel.setDisplayDebugInfo(true);
             webcamPanel.setImageSizeDisplayed(true);
             webcamPanel.setMirrored(false);
             webcamPanel.resume();
-        } else {
-            
+        }else{
             startCamera();
         }
     }
-    
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -151,28 +147,28 @@ public class Clase5Camara extends javax.swing.JFrame implements Runnable,
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 368, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 147, Short.MAX_VALUE)
+            .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        jButton1.setText("Take Again");
+        jButton1.setText("tomar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Take");
+        jButton2.setText("tomar de nuevo");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Save");
+        jButton3.setText("guardar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -184,46 +180,48 @@ public class Clase5Camara extends javax.swing.JFrame implements Runnable,
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton3)))
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addGap(51, 51, 51)
+                .addComponent(jButton1)
+                .addGap(54, 54, 54)
+                .addComponent(jButton2)
+                .addGap(43, 43, 43)
+                .addComponent(jButton3)
+                .addContainerGap(227, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(64, 64, 64)
+                .addGap(143, 143, 143)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 120, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
                     .addComponent(jButton1)
+                    .addComponent(jButton2)
                     .addComponent(jButton3))
-                .addGap(28, 28, 28))
+                .addGap(54, 54, 54))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-     webcamPanel.pause();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        takePicture();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        restartCamera(jPanel1, webcamPanel);
+        // TODO add your handling code here:
+         webcamPanel.pause();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-       takePicture();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        restartCamera(jPanel1,webcamPanel);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -242,20 +240,20 @@ public class Clase5Camara extends javax.swing.JFrame implements Runnable,
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Clase5Camara.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CamaraTest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Clase5Camara.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CamaraTest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Clase5Camara.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CamaraTest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Clase5Camara.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CamaraTest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Clase5Camara().setVisible(true);
+                new CamaraTest().setVisible(true);
             }
         });
     }
@@ -267,83 +265,69 @@ public class Clase5Camara extends javax.swing.JFrame implements Runnable,
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 
-    
 
-    
 
     @Override
-    public void windowClosing(WindowEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void windowClosing(WindowEvent we) {
+        
     }
 
     @Override
-    public void windowClosed(WindowEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void windowClosed(WindowEvent we) {
+  
     }
 
     @Override
-    public void windowIconified(WindowEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void windowIconified(WindowEvent we) {
     }
 
     @Override
-    public void windowDeiconified(WindowEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void windowDeiconified(WindowEvent we) {
     }
 
     @Override
-    public void windowActivated(WindowEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void windowActivated(WindowEvent we) {
     }
 
     @Override
-    public void windowDeactivated(WindowEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void windowDeactivated(WindowEvent we) {
     }
 
     @Override
-    public void uncaughtException(Thread t, Throwable e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void uncaughtException(Thread thread, Throwable thrwbl) {
     }
 
     @Override
-    public void itemStateChanged(ItemEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void itemStateChanged(ItemEvent ie) {
     }
 
     @Override
     public void webcamFound(WebcamDiscoveryEvent wde) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void webcamGone(WebcamDiscoveryEvent wde) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void webcamOpen(WebcamEvent we) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void webcamClosed(WebcamEvent we) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void webcamDisposed(WebcamEvent we) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void webcamImageObtained(WebcamEvent we) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void windowOpened(WindowEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void windowOpened(WindowEvent we) {
     }
 
+    
 }

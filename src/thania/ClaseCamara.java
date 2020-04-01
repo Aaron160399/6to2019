@@ -5,25 +5,105 @@
  */
 package thania;
 
+import com.github.sarxos.webcam.Webcam;
+import com.github.sarxos.webcam.WebcamDiscoveryEvent;
+import com.github.sarxos.webcam.WebcamDiscoveryListener;
+import com.github.sarxos.webcam.WebcamEvent;
+import com.github.sarxos.webcam.WebcamListener;
+import com.github.sarxos.webcam.WebcamPanel;
+import com.github.sarxos.webcam.WebcamPicker;
+import com.github.sarxos.webcam.WebcamResolution;
+import com.github.sarxos.webcam.WebcamUtils;
+import com.github.sarxos.webcam.util.ImageUtils;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Image;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  *
  * @author lizbe
  */
-public class ClaseCamara extends javax.swing.JFrame implements Runnable,Webcam,WindowListener, Thread.UncaughtExceptionHandler, ItemListener, Webcam {
+public class ClaseCamara extends javax.swing.JFrame implements Runnable,WebcamListener,WindowListener, Thread.UncaughtExceptionHandler, ItemListener, WebcamDiscoveryListener {
 
     
+    private static final long serialVersionUID =1L;
+    private Webcam webcam =null;
+    private WebcamPanel webcamPanel = null;
+    private WebcamPicker picker =null;
     
     
     public ClaseCamara() {
         initComponents();
     }
-
-
+    
+    void starCamera(){
+        webcam = picker.getSelectedWebcam();
+        if(webcam==null){
+            System.out.println("no webcams found...");
+            System.out.println(1);
+        }
+    
+   webcam.setViewSize(WebcamResolution.VGA.getSize());
+   webcam.addWebcamListener(this);
+   
+        System.out.println("selected"+ webcam.getName());
+        webcamPanel = new WebcamPanel(webcam, new Dimension(500,500),false);
+        webcamPanel.setFPSDisplayed(true);
+        jPanel1.removeAll();
+        jPanel1.setLayout(new FlowLayout());
+        jPanel1.add(webcamPanel,BorderLayout.CENTER);
+        pack();
+        setVisible(true);
+        Thread t = new Thread(){
+            @Override
+            public void run(){
+                webcamPanel.start();
+                
+            }
+        };
+        t.setName("example-starter");
+        t.setDaemon(true);
+        t.setUncaughtExceptionHandler(this);
+        
+    }
+    
+    void takePicture(){
+        WebcamUtils.capture(webcam, "c: \\Users\\thania\\Desktop\\Fotos\\img",ImageUtils.FORMAT_PNG);
+        webcamPanel.stop();
+        jPanel1.removeAll();
+        ImageIcon imageIcon = new ImageIcon("c:\\Users\\thania\\Desktop\\Fotos\\img.png");
+        Icon icon = new ImageIcon(imageIcon.getImage().getScaledInstance(jPanel1.getWidth(),jPanel1.getHeight(),Image.SCALE_DEFAULT));
+        JLabel jLabel =new JLabel();
+        jLabel.setSize(500, 500);
+        jLabel.setIcon(icon);
+        jPanel1.add(jLabel);
+        jPanel1.revalidate();
+        jPanel1.repaint();
+        
+        
+    }
+    
+    public void restartCamera(JPanel jpanel, WebcamPanel webcamPanel ){
+        if(webcam.isOpen()){
+            webcamPanel.setFillArea(false);
+            webcamPanel.setFPSDisplayed(true);
+            webcamPanel.setDisplayDebugInfo(true);
+            webcamPanel.setImageSizeDisplayed(true);
+            webcamPanel.setMirrored(false);
+            webcamPanel.resume();
+        }else{
+            starCamera();
+        }
+    }
 
 
     /**
@@ -63,8 +143,18 @@ public class ClaseCamara extends javax.swing.JFrame implements Runnable,Webcam,W
         });
 
         jButton2.setText("take agein");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("save");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -101,7 +191,18 @@ public class ClaseCamara extends javax.swing.JFrame implements Runnable,Webcam,W
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        webcamPanel.pause();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        takePicture();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        restartCamera(jPanel1, webcamPanel);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -147,7 +248,18 @@ public class ClaseCamara extends javax.swing.JFrame implements Runnable,Webcam,W
 
     @Override
     public void run() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+              setLayout(new BorderLayout());
+                addWindowListener(this);
+                picker=new WebcamPicker();
+                picker.addItemListener(this);
+                add(picker,BorderLayout.NORTH);
+                add(jPanel1,BorderLayout.CENTER);
+                add(jButton1,BorderLayout.EAST);
+                add(jButton2,BorderLayout.WEST);
+                add(jButton3,BorderLayout.SOUTH);
+                
+                starCamera();
+                
     }
 
     @Override
@@ -192,6 +304,36 @@ public class ClaseCamara extends javax.swing.JFrame implements Runnable,Webcam,W
 
     @Override
     public void itemStateChanged(ItemEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void webcamOpen(WebcamEvent we) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void webcamClosed(WebcamEvent we) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void webcamDisposed(WebcamEvent we) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void webcamImageObtained(WebcamEvent we) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void webcamFound(WebcamDiscoveryEvent wde) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void webcamGone(WebcamDiscoveryEvent wde) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

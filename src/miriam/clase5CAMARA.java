@@ -45,6 +45,7 @@ public class clase5CAMARA extends javax.swing.JFrame implements Runnable, Webcam
      */
     public clase5CAMARA() {
         initComponents();
+        run();
       
     }
     

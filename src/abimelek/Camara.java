@@ -5,19 +5,105 @@
  */
 package abimelek;
 
+import com.github.sarxos.webcam.Webcam;
+import com.github.sarxos.webcam.WebcamDiscoveryEvent;
+import com.github.sarxos.webcam.WebcamDiscoveryListener;
+import com.github.sarxos.webcam.WebcamEvent;
+import com.github.sarxos.webcam.WebcamListener;
+import com.github.sarxos.webcam.WebcamPanel;
+import com.github.sarxos.webcam.WebcamPicker;
+import com.github.sarxos.webcam.WebcamResolution;
+import com.github.sarxos.webcam.WebcamUtils;
+import com.github.sarxos.webcam.util.ImageUtils;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Image;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
 /**
  *
  * @author Avril
  */
-public class Camara extends javax.swing.JFrame {
+public class Camara extends javax.swing.JFrame implements Runnable,
+        WebcamListener, WindowListener, Thread.UncaughtExceptionHandler,
+        ItemListener, WebcamDiscoveryListener {
 
     /**
      * Creates new form Camara
      */
     public Camara() {
         initComponents();
+        run();
     }
+    private static final long serialVersionUID = 1L;
+    private Webcam webcam = null;
+    private WebcamPanel webcamPanel = null;
+    private WebcamPicker picker = null;
 
+    void startCamera() {
+        webcam = picker.getSelectedWebcam();
+        if (webcam == null) {
+            System.out.println("No ewbcams found...");
+            System.exit(1);
+        }
+        webcam.setViewSize(WebcamResolution.VGA.getSize());
+        webcam.addWebcamListener(this);
+        System.out.println("selected " + webcam.getName());
+        webcamPanel = new WebcamPanel(webcam, new Dimension(500, 500), false);
+        webcamPanel.setFPSDisplayed(true);
+        jPanel1.removeAll();
+        jPanel1.setLayout(new FlowLayout());
+        jPanel1.add(webcamPanel, BorderLayout.CENTER);
+        pack();
+        setVisible(true);
+
+        Thread t = new Thread() {
+
+            @Override
+            public void run() {
+                webcamPanel.start();
+            }
+        };
+        t.setName("example-starter");
+        t.setDaemon(true);
+        t.setUncaughtExceptionHandler(this);
+        t.start();
+    }
+ void takePicture(){
+        WebcamUtils.capture(webcam, "C:\\Users\\Avril\\Desktop\\img.png",ImageUtils.FORMAT_PNG);
+        webcamPanel.stop();
+        jPanel1.removeAll();
+        ImageIcon imageIcon = new ImageIcon (
+            "C:\\Users\\Avril\\Desktop\\img.png");
+        Icon icon = new ImageIcon (
+            imageIcon.getImage().getScaledInstance(jPanel1.getWidth(),
+                    jPanel1.getHeight(), Image.SCALE_DEFAULT));
+        JLabel jLabel = new JLabel();
+        jLabel.setSize(500, 500);
+        jLabel.setIcon(icon);
+        jPanel1.add(jLabel);
+        jPanel1.revalidate();
+        jPanel1.repaint();
+    }
+    
+    public void restartCamera(JPanel jPanel, WebcamPanel webcamPanel){
+        if (webcam.isOpen()) {
+            webcamPanel.setFillArea(false);
+            webcamPanel.setFPSDisplayed(true);
+            webcamPanel.setDisplayDebugInfo(true);
+            webcamPanel.setMirrored(false);
+        } else {
+            startCamera();
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -48,10 +134,25 @@ public class Camara extends javax.swing.JFrame {
         );
 
         jButton1.setText("Take");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Take again");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("save");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -82,6 +183,21 @@ public class Camara extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        webcamPanel.pause();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        takePicture();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        restartCamera(jPanel1,webcamPanel);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -124,4 +240,79 @@ public class Camara extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void run() {
+        setLayout(new BorderLayout());
+        addWindowListener(this);
+        picker = new WebcamPicker();
+        picker.addItemListener(this);
+        add(picker, BorderLayout.NORTH);
+        add(jPanel1, BorderLayout.CENTER);
+        add(jButton1, BorderLayout.EAST);
+        add(jButton2, BorderLayout.WEST);
+        add(jButton3, BorderLayout.SOUTH);
+        startCamera();
+    }
+
+    @Override
+    public void webcamOpen(WebcamEvent we) {
+
+    }
+
+    @Override
+    public void webcamClosed(WebcamEvent we) {
+    }
+
+    @Override
+    public void webcamDisposed(WebcamEvent we) {
+    }
+
+    @Override
+    public void webcamImageObtained(WebcamEvent we) {
+    }
+
+    @Override
+    public void windowOpened(WindowEvent we) {
+    }
+
+    @Override
+    public void windowClosing(WindowEvent we) {
+    }
+
+    @Override
+    public void windowClosed(WindowEvent we) {
+    }
+
+    @Override
+    public void windowIconified(WindowEvent we) {
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent we) {
+    }
+
+    @Override
+    public void windowActivated(WindowEvent we) {
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent we) {
+    }
+
+    @Override
+    public void uncaughtException(Thread thread, Throwable thrwbl) {
+    }
+
+    @Override
+    public void itemStateChanged(ItemEvent ie) {
+    }
+
+    @Override
+    public void webcamFound(WebcamDiscoveryEvent wde) {
+    }
+
+    @Override
+    public void webcamGone(WebcamDiscoveryEvent wde) {
+    }
 }

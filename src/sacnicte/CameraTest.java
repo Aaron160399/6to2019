@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package aaron;
+package sacnicte;
 
 import com.github.sarxos.webcam.Webcam;
 import com.github.sarxos.webcam.WebcamDiscoveryEvent;
@@ -30,127 +30,82 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author Aaron
+ * @author blanc
  */
-public class CameraTest extends javax.swing.JFrame implements Runnable, 
-        WebcamListener, WindowListener, Thread.UncaughtExceptionHandler, 
-        ItemListener, WebcamDiscoveryListener {
-    
-    //Creamos una variable que indicará la versión del serial
-    private static final long serialVersionUID = 1L;
-    //Creamos un objeto del tipo Webcam
-    private Webcam webcam = null;
-    //Creamos un objeto del tipo WebcamPanel, este sirve para contener la cámara
-    private WebcamPanel webcamPanel = null;
-    /*Creamos un objeto del tipo WebcamPicker, nos permiirá desplegar todas las
-    cámaras disponibles para el equipo*/
-    private WebcamPicker picker = null;
+public class CameraTest extends javax.swing.JFrame implements Runnable, WebcamListener, WindowListener,
+             Thread.UncaughtExceptionHandler, ItemListener, WebcamDiscoveryListener{
 
+    private static final long serialVersionUID = 1L;
+    private Webcam webcam = null;
+    private WebcamPanel webcamPanel = null;
+    private WebcamPicker picker = null;
     /**
-     * Creates new form CameraTest
+     * Creates new form WebCam
      */
     public CameraTest() {
         initComponents();
-        /*Mandamos a llamar el método RUN para que nuestras configuraciones 
-        se muestren*/
         run();
     }
-    
+
     void startCamera(){
-        //Obtenemos la cámara que está seleccionada
         webcam = picker.getSelectedWebcam();
-        /*En caso de no haber cámara seleccionada (o disponibes) mostramos 
-        un mensaje*/
         if (webcam == null) {
-                System.out.println("No webcams found...");
-                System.exit(1);
+            System.out.println("No webcams found...");
+            System.exit(1);
         }
-        /*Establecemos una resolución para la cámara, todo depende de las 
-        capacidades de nuestra computadora para la resolución disponibles*/
         webcam.setViewSize(WebcamResolution.VGA.getSize());
-        webcam.addWebcamListener(this);
-        //Sólo por seguridad, obtenemos el nombre de la cámara seleccionada
+        webcam.addWebcamListener((this));
         System.out.println("selected " + webcam.getName());
-        //Agregamos la cámara al panel de cámara
-        webcamPanel = new WebcamPanel(webcam, new Dimension(500, 500) ,false);
+        webcamPanel = new WebcamPanel(webcam, new Dimension(500,500), false);
         webcamPanel.setFPSDisplayed(true);
-        //vaciamos de nuevo el panel de nuestra vetana
-        //Vaciamos el panel 1. Este panel es el que agregamos en nuestra interfaz
         jPanel1.removeAll();
-        //Agregamos un nuevo layout
         jPanel1.setLayout(new FlowLayout());
-        //Insertamos la cámara en él
         jPanel1.add(webcamPanel, BorderLayout.CENTER);
         pack();
         setVisible(true);
-        //Creamos un hilo
-        Thread t = new Thread() {
-
-                @Override
-                public void run() {
-                    //Iniciamos la cámara
-                    webcamPanel.start();
-                }
+        
+        Thread t = new Thread(){
+            
+            @Override
+            public void run(){
+                webcamPanel.start();
+            }
         };
-        //Agregamos un identificador y otras configuraciones al hilo
         t.setName("example-starter");
         t.setDaemon(true);
         t.setUncaughtExceptionHandler(this);
         t.start();
     }
     
-    public void restartCamera(JPanel jPanel, WebcamPanel webcamPanel){
-        /*Pregunto si la cámara está abierta, en caso de ser así sólamente
-        reinicio la imagen*/
-        if (webcam.isOpen()) {
-            //Al paner de la cámara le agregamos configuraciones
-            //Esta característica permite que se muestren la imagen en todo el panel
-            webcamPanel.setFillArea(false);
-            //Esta característica permite que se muestren los fotogramas por segundo
-            webcamPanel.setFPSDisplayed(true);
-            //Esta característica permite mostrar la información de debuggeo
-            webcamPanel.setDisplayDebugInfo(true);
-            //Esta característica permite mostrar el tamaño de imagen
-            webcamPanel.setImageSizeDisplayed(true);
-            //Esta característica permite que se tome la visualización como "espejo"
-            webcamPanel.setMirrored(false);
-            /*Las configuraciones anteriores se pueden omitir. La siguiente 
-            línea es la que nos interesa en realidad
-            Volvemos a correr la cámara que ya tenemos abierta*/
-            webcamPanel.resume();
-        } else {
-            //Si se ha cerrado la cámara entonces volvemos a crear una
-            startCamera();
-        }
-    }
-    
     void takePicture(){
-        //Guardamos la foto en una carpeta donde queraos que se guarden las imágenes
-        WebcamUtils.capture(webcam, "C:\\Users\\aaron\\Desktop\\Fotos\\img", 
-                ImageUtils.FORMAT_PNG);
-        //Detenemos la cámara
+        WebcamUtils.capture(webcam, "C:\\Users\\blanc\\Pictures\\img",ImageUtils.FORMAT_PNG);
         webcamPanel.stop();
-        //Limpiamos el panel del JFrame
         jPanel1.removeAll();
-        //Creamos un nuevo ImageIcon con la foto que acabamos de tomar
-        ImageIcon imageIcon = new ImageIcon(
-            "C:\\Users\\aaron\\Desktop\\Fotos\\img.png");
-        //Creamos un nuevo icono
+        ImageIcon imageIcon = new ImageIcon("C:\\Users\\blanc\\Pictures\\img.png");
         Icon icon = new ImageIcon(
-            imageIcon.getImage().getScaledInstance(jPanel1.getWidth(),
+        imageIcon.getImage().getScaledInstance(jPanel1.getWidth(),
                 jPanel1.getHeight(), Image.SCALE_DEFAULT));
-        //Creamos un nuevo JLabel
         JLabel jLabel = new JLabel();
-        //Le damos un tamaño
-        jLabel.setSize(500, 500);
-        //Le colocamos la imagen que tomamos
+        jLabel.setSize(500,500);
         jLabel.setIcon(icon);
-        //Agregamos el Label al panel para mostrar el resultado
+        
         jPanel1.add(jLabel);
         jPanel1.revalidate();
         jPanel1.repaint();
     }
-
+    
+    public void restartCamera(JPanel jPanel, WebcamPanel webcamPanel){
+        if (webcam.isOpen()) {
+            webcamPanel.setFillArea(false);
+            webcamPanel.setFPSDisplayed(true);
+            webcamPanel.setDisplayDebugInfo(true);
+            webcamPanel.setImageSizeDisplayed(true);
+            webcamPanel.setMirrored(false);
+            webcamPanel.resume();
+        }else{
+            startCamera();
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -177,7 +132,7 @@ public class CameraTest extends javax.swing.JFrame implements Runnable,
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGap(0, 122, Short.MAX_VALUE)
         );
 
         jButton1.setText("Take");
@@ -211,45 +166,42 @@ public class CameraTest extends javax.swing.JFrame implements Runnable,
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jButton3)
-                .addGap(0, 187, Short.MAX_VALUE))
+                .addGap(0, 167, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(89, 89, 89)
+                .addGap(80, 80, 80)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2)
                     .addComponent(jButton3))
-                .addContainerGap())
+                .addGap(34, 34, 34))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        //Pausamos la cámara para que parezca que tomamos la foto
-        webcamPanel.pause();
+         // TODO add your handling code here:
+         webcamPanel.pause();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        //Reconfiguro la cámara
-        restartCamera(jPanel1, webcamPanel);
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-        //Guardamos la foto
-        takePicture();
+         // TODO add your handling code here:
+         takePicture();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+         // TODO add your handling code here:
+         restartCamera(jPanel1, webcamPanel);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -277,6 +229,7 @@ public class CameraTest extends javax.swing.JFrame implements Runnable,
             java.util.logging.Logger.getLogger(CameraTest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -295,114 +248,91 @@ public class CameraTest extends javax.swing.JFrame implements Runnable,
 
     @Override
     public void run() {
-        /*Agregamos un nuevo layout a la ventana para acomodar los sobjetos, 
-        puede ser cualquier tipo de Layout, pero para este caso utilizaremos
-        BorderLayout*/
+
         setLayout(new BorderLayout());
-        //Agregamos un WindowListener
         addWindowListener(this);
-        /*Inicializamos la variable picker, para enlistar y seleccionar entre 
-        las diferentes cámaras disponibles*/
         picker = new WebcamPicker();
-        /*De igual forma, agregamos un "escuchador de items", para lograr que 
-        nuestro seleccionador sea funcional*/
         picker.addItemListener(this);
         add(picker, BorderLayout.NORTH);
         add(jPanel1, BorderLayout.CENTER);
         add(jButton1, BorderLayout.EAST);
         add(jButton2, BorderLayout.WEST);
         add(jButton3, BorderLayout.SOUTH);
-        //Terminamos la configuración de nuestra cámara
         startCamera();
     }
 
     @Override
     public void webcamOpen(WebcamEvent we) {
-        
+
     }
 
     @Override
     public void webcamClosed(WebcamEvent we) {
-        
+
     }
 
     @Override
     public void webcamDisposed(WebcamEvent we) {
-        
+
     }
 
     @Override
     public void webcamImageObtained(WebcamEvent we) {
-        
+
     }
 
     @Override
     public void windowOpened(WindowEvent we) {
-        
+
     }
 
     @Override
     public void windowClosing(WindowEvent we) {
-        
+
     }
 
     @Override
     public void windowClosed(WindowEvent we) {
-        
+
     }
 
     @Override
     public void windowIconified(WindowEvent we) {
-        
+
     }
 
     @Override
     public void windowDeiconified(WindowEvent we) {
-        
+
     }
 
     @Override
     public void windowActivated(WindowEvent we) {
-        
+
     }
 
     @Override
     public void windowDeactivated(WindowEvent we) {
-        
+
     }
 
     @Override
     public void uncaughtException(Thread thread, Throwable thrwbl) {
-        
+
     }
 
     @Override
     public void itemStateChanged(ItemEvent ie) {
-        if (ie.getItem() != webcam) {
-            //Si hay una cámara seleccionada
-            if (webcam != null) {
-                //Detener la cámara actual
-                webcamPanel.stop();
-                //Removemos el panel de cámara de nuestra interfaz
-                remove(webcamPanel);
-                //Removemos el escuchador y cerramos la cámara
-                webcam.removeWebcamListener(this);
-                webcam.close();
-                //Inicializamos el objeto Webcam con la nueva cámara seleccionada
-                webcam = (Webcam) ie.getItem();
-                //Volvemos a configurar la cámara
-                startCamera();
-            }
-        }
+
     }
 
     @Override
     public void webcamFound(WebcamDiscoveryEvent wde) {
-        
+
     }
 
     @Override
     public void webcamGone(WebcamDiscoveryEvent wde) {
-        
+
     }
 }
